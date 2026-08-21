@@ -247,7 +247,7 @@ const Footer = () => {
         {/* Bottom Disclaimer */}
         <div className="pt-6">
           <p className="text-slate-500 text-[11px] leading-relaxed text-center max-w-[1240px] mx-auto">
-            Disclaimer: Our custom tutorsand academic research assistance is intended for study, reference, and educational guidance purposes only. Direct submission of provided model materials without independent work and proper attribution may violate academic integrity standards.
+            Disclaimer: Our custom tutors assistance is intended for study, reference, and educational guidance purposes only. Direct submission of provided model materials without independent work and proper attribution may violate academic integrity standards.
           </p>
         </div>
 
