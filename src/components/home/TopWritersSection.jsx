@@ -78,17 +78,17 @@ const TopWritersSection = () => {
             >
               <div>
                 {/* Top Profile Row */}
-                <div className="flex items-start justify-between relative mb-3.5">
-                  <div className="flex items-center gap-3">
+                <div className="flex items-start justify-between relative mb-3.5 gap-2">
+                  <div className="flex items-center gap-3 min-w-0">
                     {/* Avatar */}
                     <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-gray-200">
                       <img src={writer.avatar} alt={writer.name} className="w-full h-full object-cover" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex items-center gap-1">
-                        <h3 className="text-[15px] font-bold text-gray-900">{writer.name}</h3>
+                        <h3 className="text-[15px] font-bold text-gray-900 whitespace-nowrap truncate">{writer.name}</h3>
                         {/* Verified Badge Icon */}
-                        <svg className="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                        <svg className="w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.99 14l-4.2-4.2 1.41-1.41 2.79 2.79 7.21-7.21 1.41 1.41-8.62 8.62z"/>
                         </svg>
                       </div>
@@ -96,14 +96,14 @@ const TopWritersSection = () => {
                         <div className="flex text-amber-400 text-[12px]">★★★★★</div>
                         <span className="text-[12px] font-bold text-gray-900">{writer.rating}</span>
                       </div>
-                      <p className="text-[11px] text-gray-500 font-medium mt-0.5">{writer.degree}</p>
+                      <p className="text-[11px] text-gray-500 font-medium mt-0.5 whitespace-nowrap">{writer.degree}</p>
                     </div>
                   </div>
 
                   {/* Experience Badge */}
-                  <div className="bg-primary-soft text-brand-purple px-2.5 py-1 rounded-lg text-center shrink-0 border border-primary-border">
+                  <div className="bg-primary-soft text-brand-purple px-2.5 py-1 rounded-lg text-center shrink-0 border border-primary-border ml-2">
                     <div className="text-[13px] font-extrabold leading-none">{writer.experience}</div>
-                    <div className="text-[8px] font-bold text-brand-purple uppercase tracking-wider mt-0.5">Years Exp.</div>
+                    <div className="text-[8px] font-bold text-brand-purple uppercase tracking-wider mt-0.5 whitespace-nowrap">Years Exp.</div>
                   </div>
                 </div>
 
