@@ -7,6 +7,7 @@ import Register from '../features/auth/pages/Register';
 import Login from '../features/auth/pages/Login';
 import PlaceOrder from '../features/orders/pages/PlaceOrder';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
+import Reviews from '../features/reviews/pages/Reviews';
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       {/* Public Routes with Full Public Navbar & Footer */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/reviews" element={<Reviews />} />
         <Route path="/account/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Route>

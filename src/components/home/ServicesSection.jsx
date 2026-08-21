@@ -105,7 +105,7 @@ const ServiceCard = ({ service, showItems }) => (
 
 const ServicesSection = () => {
   return (
-    <section className="w-full bg-surface py-10 lg:py-14 px-4 sm:px-10 lg:px-16 xl:px-20">
+    <section className="w-full bg-surface py-10 lg:py-14 px-4 sm:px-10 lg:px-16 xl:px-20" id="services">
       <div className="w-full max-w-[1040px] mx-auto">
 
         {/* Header */}

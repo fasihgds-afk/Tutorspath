@@ -31,35 +31,24 @@ const Home = () => {
 
       {/* 4. FEATURES */}
       <FeaturesSection />
-
+  <GuaranteeSection />
       {/* 5. HOW IT WORKS */}
       <HowItWorksSection />
 
       {/* 6. SERVICES */}
       <ServicesSection />
 
-      {/* 7. CTA BANNER */}
+      {/* CTA SECTIONS - SHOW ONE AFTER ANOTHER */}
       <CTABannerSection />
-
-      {/* 8. GUARANTEE */}
-      <GuaranteeSection />
-
-      {/* 9. TRUSTED BY */}
-      <TrustedBySection />
-
-      {/* 10. TESTIMONIALS */}
-      <TestimonialsSection />
-
-      {/* 11. SUPPORT BANNER */}
-      <SupportBannerSection />
-
-      {/* 12. HELP BANNER */}
+    
       <HelpBannerSection />
 
-      {/* 13. SUPPORT (Features + Contact Bar) */}
+      {/* REMAINING SECTIONS */}
+    
+      <TrustedBySection />
+      <TestimonialsSection />
+        <SupportBannerSection />
       <SupportSection />
-
-      {/* 14. FAQ */}
       <FAQSection />
 
     </main>

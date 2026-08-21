@@ -45,7 +45,7 @@ const FAQSection = () => {
   const toggle = (id) => setOpenId(openId === id ? null : id);
 
   return (
-    <section className="w-full bg-surface py-10 lg:py-14 px-4 sm:px-10 lg:px-16 xl:px-20">
+    <section id="faqs" className="w-full bg-surface py-10 lg:py-14 px-4 sm:px-10 lg:px-16 xl:px-20">
       <div className="w-full max-w-[1040px] mx-auto flex flex-col items-center">
 
         {/* Top Badge */}

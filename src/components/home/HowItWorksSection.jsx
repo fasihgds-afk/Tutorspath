@@ -50,7 +50,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="w-full bg-surface-alt py-10 px-4 sm:px-10 lg:px-16 xl:px-20">
+    <section className="w-full bg-surface-alt py-10 px-4 sm:px-10 lg:px-16 xl:px-20" id="how-it-works">
       <div className="w-full max-w-[1040px] mx-auto flex flex-col items-center">
 
         {/* Pill Badge */}

@@ -184,13 +184,7 @@ const SupportSection = () => {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
-                <a href="#"
-                  className="group inline-flex items-center justify-center gap-2 bg-surface hover:bg-primary-50 text-brand-purple text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] shadow-sm hover:scale-[1.03] hover:shadow-md active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
-                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Live Chat Now
-                </a>
+              
 
                 <a href="tel:+442033185601"
                   className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">

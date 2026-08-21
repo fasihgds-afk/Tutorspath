@@ -44,7 +44,7 @@ const TopWritersSection = () => {
   ];
 
   return (
-    <section className="w-full bg-[#f8f9fc] py-10 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#f8f9fc] py-10 px-4 sm:px-6 lg:px-8" id="top-writers">
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
         
         {/* Top Pill Badge */}
