@@ -127,11 +127,11 @@ const StudentDashboard = () => {
 
                 {/* 4. Email */}
                 <a
-                  href="mailto:support@tutorsfy.com"
+                  href="mailto:support@TutorsPath.com"
                   className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-primary text-base">✉️</span>
-                  <span className="font-medium">support@tutorsfy.com</span>
+                  <span className="font-medium">support@TutorsPath.com</span>
                 </a>
 
                 {/* 5. Phone */}
@@ -140,7 +140,7 @@ const StudentDashboard = () => {
                   className="flex items-center gap-3 px-4 py-3 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-primary text-base">📞</span>
-                  <span className="font-semibold">+1 (877) 657-8180</span>
+                  <span className="font-semibold">+92-329-5128671</span>
                 </a>
 
               </div>

@@ -3,39 +3,33 @@ import React, { useState } from 'react';
 const faqs = [
   {
     id: 1,
-    question: 'How do you guarantee plagiarism-free and AI-free writing?',
+    question: 'What subjects do TutorsPath tutors teach?',
     answer:
-      'Our work process is designed so that every order is written by qualified human experts—not AI tools. Our dedicated quality assurance team then checks each order with authentic plagiarism detection tools including Turnitin, and screens for AI-generated content, to make sure it is 100% original. Our experts carry out extensive research to provide authentic academic writing assistance to students worldwide. You can also request a plagiarism report to verify that the order is 100% free of plagiarism and AI-generated content.',
+      'We offer tutoring across a wide range of subjects, including Mathematics, Science, English, Computer Science, Economics, and more, from school level through university.',
   },
   {
     id: 2,
-    question: 'Will the writer work as per my order guidelines?',
+    question: 'Are the tutoring sessions conducted online?',
     answer:
-      'Absolutely. When you place an order, you provide all your instructions, requirements, and any files or references. Your assigned writer follows these guidelines precisely. You can also communicate directly with your writer through our platform to clarify any points or provide additional details at any stage.',
+      'Yes. TutorsPath provides convenient online tutoring sessions, allowing students to learn from qualified tutors from anywhere in the world.',
   },
   {
     id: 3,
-    question: 'How fast can you write my paper?',
+    question: 'Can I choose my own tutor?',
     answer:
-      'We offer flexible deadlines to suit your needs. Depending on the complexity and length of your paper, we can deliver within as little as a few hours for urgent orders, or up to several weeks for longer dissertations. Simply select your deadline when placing the order and we will ensure timely delivery.',
+      'Yes. You can explore available tutors based on their subject expertise, academic level, experience, and availability, then choose the tutor who best fits your needs.',
   },
   {
     id: 4,
-    question: 'How will you deliver my order?',
+    question: 'How long is each tutoring session?',
     answer:
-      'Once your paper is complete and has passed our quality checks, it will be delivered directly to your account on our platform. You will receive an email notification as soon as your order is ready. You can then download the completed work securely from your dashboard.',
+      "Session length can vary depending on the student's requirements. You can select the duration that works best for your learning goals when booking your session.",
   },
   {
     id: 5,
-    question: 'Can I request a revision for my paper?',
+    question: 'Can tutoring help me prepare for exams?',
     answer:
-      'Yes. We offer unlimited free revisions within the revision period. If you feel any part of the paper does not meet your requirements, simply submit a revision request with clear instructions and your writer will make the necessary changes promptly.',
-  },
-  {
-    id: 6,
-    question: 'Can I talk to my writer?',
-    answer:
-      'Yes. Our platform allows you to communicate directly with your assigned writer. You can send messages, share additional files, and track the progress of your order in real time. Our support team is also available 24/7 to assist with any queries.',
+      'Absolutely. Our tutors can provide personalized exam preparation, help identify areas where you need improvement, explain difficult concepts, and develop a focused study plan.',
   },
 ];
 
@@ -66,7 +60,7 @@ const FAQSection = () => {
 
         {/* Subtitle */}
         <p className="text-[13px] sm:text-[14px] text-text-body text-center max-w-[480px] mb-10 font-medium opacity-70 leading-relaxed">
-          Find answers to common questions about TutorsFy and our academic writing services.
+          Find answers to common questions about TutorsPath and our academic writing services.
         </p>
 
         {/* Main Grid */}
@@ -113,14 +107,14 @@ const FAQSection = () => {
               </a>
 
               <a
-                href="mailto:care@tutorsfy.co.uk"
+                href="mailto:care@tutorspath.com"
                 className="group w-full flex items-center justify-center gap-2 bg-surface hover:bg-primary-soft text-text-body border border-card-border hover:border-primary-border text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-sm hover:scale-[1.02] active:scale-[0.97] transition-all duration-200"
               >
                 <svg className="w-4 h-4 text-brand-purple group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Email Us
-                <span className="text-text-body font-normal text-[12px] opacity-60">care@tutorsfy.co.uk</span>
+                <span className="text-text-body font-normal text-[12px] opacity-60">care@tutorspath.com</span>
               </a>
             </div>
 

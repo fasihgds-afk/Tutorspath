@@ -58,7 +58,7 @@ const HelpBannerSection = () => {
                   Not sure what you need?
                 </h3>
                 <p className="text-surface text-[13px] lg:text-[14px] font-normal opacity-85 max-w-[340px] leading-relaxed">
-                  Our experts are here to help you choose the right solution for your academic success.
+                  Our experts are here to help you choose the right solution for your tutoring success.
                 </p>
               </div>
             </div>

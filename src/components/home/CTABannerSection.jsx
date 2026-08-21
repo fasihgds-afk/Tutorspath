@@ -20,13 +20,13 @@ const CTABannerSection = () => {
           {/* Middle Content */}
           <div className="w-full lg:w-[40%] flex flex-col justify-center lg:px-6 text-center lg:text-left">
             <h2 className="text-[20px] lg:text-[22px] font-bold text-text-dark leading-snug tracking-tight">
-              Maximize Your Writing Impact with{' '}
+              Maximize Your Learing Growth with{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
                 Exceptional Academic Assistance!
               </span>
             </h2>
             <p className="text-text-body text-[13px] lg:text-[13.5px] mt-2.5 leading-relaxed font-normal opacity-70">
-              From essays to research papers, we help you achieve top grades with high-quality, original, and timely content.
+              From concept clarity to exam preparation, we help you understand better, learn faster, and achieve your academic goals with confidence.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ const CTABannerSection = () => {
           {/* Right: Checklist + CTA */}
           <div className="w-full lg:w-[26%] flex flex-col justify-center lg:pl-6">
             <ul className="space-y-2.5 mb-5">
-              {['Top Quality Work', 'Affordable Pricing', 'Total Satisfaction Guaranteed'].map((item) => (
+              {['Top Quality Guidance', 'Affordable Fee Structure', 'Total Satisfaction Guaranteed'].map((item) => (
                 <li key={item} className="group flex items-center gap-2.5">
                   <span className="w-4 h-4 rounded-full bg-primary flex items-center justify-center text-surface shrink-0 group-hover:scale-125 transition-transform duration-200">
                     <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@ const CTABannerSection = () => {
 
             <a href="#"
               className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(5,150,105,0.3)] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200">
-              Place Your Order Now <span className="text-base leading-none">&rarr;</span>
+              Book Your Demo <span className="text-base leading-none">&rarr;</span>
             </a>
           </div>
 

@@ -1,4 +1,4 @@
-# Tutorsfy — Student Frontend
+# TutorsPath — Student Frontend
 
 A React + Vite student-facing web application for placing and tracking academic orders.
 

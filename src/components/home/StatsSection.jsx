@@ -3,7 +3,7 @@ import React from 'react';
 const StatsSection = () => {
   const stats = [
     {
-      id: 1, number: '500+', label: 'Expert Writers',
+      id: 1, number: '500+', label: 'Expert Tutors',
       icon: (
         <svg className="w-7 h-7 fill-brand-purple text-brand-purple" viewBox="0 0 20 20">
           <path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path d="M18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
@@ -23,7 +23,7 @@ const StatsSection = () => {
       ),
     },
     {
-      id: 3, number: '8.3K+', label: 'Orders Completed',
+      id: 3, number: '8.3K+', label: 'Sessions Completed',
       icon: (
         <svg className="w-7 h-7 fill-brand-purple text-brand-purple" viewBox="0 0 24 24">
           <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6 10.55l-6 3.27-6-3.27v-4.9L12 10.8l6-3.15v4.9z" />
@@ -31,7 +31,7 @@ const StatsSection = () => {
       ),
     },
     {
-      id: 4, number: '99%', label: 'Client Satisfaction',
+      id: 4, number: '99%', label: 'Student Satisfaction',
       icon: (
         <svg className="w-7 h-7 fill-brand-purple text-brand-purple" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />

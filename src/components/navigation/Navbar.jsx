@@ -27,32 +27,12 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
 
           {/* Left: Logo */}
-          <Link to="/" className="flex items-center space-x-2 shrink-0 group">
-            <div className="w-8 h-8 flex items-center justify-center">
-              <svg className="w-full h-full" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 5L30 10L20 15L10 10L20 5Z" fill="url(#paint0_linear)"/>
-                <path d="M12 16.5V23C12 27.5 15.5 31 20 31C24.5 31 28 27.5 28 23V16.5" stroke="url(#paint1_linear)" strokeWidth="2.5" strokeLinecap="round"/>
-                <path d="M16 20L20 23L24 20" stroke="url(#paint2_linear)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="31" cy="7" r="2" fill="var(--color-brand-end, #8B5CF6)"/>
-                <defs>
-                  <linearGradient id="paint0_linear" x1="10" y1="5" x2="30" y2="15" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="var(--color-brand-start, #6366F1)"/>
-                    <stop offset="1" stopColor="var(--color-brand-end, #A855F7)"/>
-                  </linearGradient>
-                  <linearGradient id="paint1_linear" x1="12" y1="16.5" x2="28" y2="31" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="var(--color-brand-start, #6366F1)"/>
-                    <stop offset="1" stopColor="var(--color-brand-end, #A855F7)"/>
-                  </linearGradient>
-                  <linearGradient id="paint2_linear" x1="16" y1="20" x2="24" y2="23" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="var(--color-brand-start, #6366F1)"/>
-                    <stop offset="1" stopColor="var(--color-brand-end, #A855F7)"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-gray-900">
-              TutorsPath
-            </span>
+          <Link to="/" className="flex items-center shrink-0">
+            <img
+              src="/TutorsPath Logo.svg"
+              alt="TutorsPath"
+              className="h-5 w-auto"
+            />
           </Link>
 
           {/* Center: Nav Links — only on xl+ */}
@@ -62,7 +42,7 @@ const Navbar = () => {
               onClick={(e) => handleHashLink(e, 'top-writers')}
               className="text-sm text-gray-700 font-medium hover:text-primary transition-colors whitespace-nowrap"
             >
-              Top Writers
+              Top Tutors
             </a>
             <a
               href="/#how-it-works"
@@ -100,10 +80,10 @@ const Navbar = () => {
               <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
               </svg>
-              <span>+44 (203) 318-5601</span>
+              <span>+92-329-5128671</span>
             </a>
 
-            {/* Place New Order */}
+            {/* Hire A Tutor */}
             <Link
               to="/account/register"
               className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
@@ -111,7 +91,7 @@ const Navbar = () => {
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>Place New Order</span>
+              <span>Hire A Tutor</span>
             </Link>
 
             {/* Login */}
@@ -156,7 +136,7 @@ const Navbar = () => {
               onClick={(e) => handleHashLink(e, 'top-writers')}
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 cursor-pointer"
             >
-              Top Writers
+              Top Tutors
             </a>
             <a
               href="/#how-it-works"
@@ -194,9 +174,9 @@ const Navbar = () => {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.45.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
-                <span>+44 (203) 318-5601</span>
+                <span>+92-329-5128671</span>
               </a>
-              {/* Place New Order / Register */}
+              {/* Hire A Tutor / Register */}
               <Link
                 to="/account/register"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -205,7 +185,7 @@ const Navbar = () => {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                <span>Place New Order</span>
+                <span>Hire A Tutor</span>
               </Link>
               <Link 
                 to="/login" 

@@ -7,7 +7,7 @@ const StudentFooter = () => {
       <div className="max-w-7xl mx-auto flex flex-col gap-2">
         {/* Line 1: Copyright & Legal Policy Links */}
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-600 font-medium">
-          <span>&copy; {new Date().getFullYear()} Tutorsfy. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} TutorsPath. All rights reserved.</span>
           <span className="text-slate-300 select-none">•</span>
           <Link to="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
           <span className="text-slate-300 select-none">•</span>

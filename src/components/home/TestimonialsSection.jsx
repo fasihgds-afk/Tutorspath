@@ -3,31 +3,28 @@ import React, { useState } from 'react';
 const testimonials = [
   {
     id: 1,
-    text: 'I used TutorsFy for my business essay, and the quality exceeded my expectations. The writer followed all instructions, included proper references, and delivered everything before the deadline.',
+    text: 'TutorsPath made learning so much easier. My tutor explained difficult concepts clearly and helped me feel confident before my exams.',
     rating: 5,
-    name: 'William B.',
-    university: 'University of Birmingham, UK',
-    subject: 'Essay Writing',
+    name: 'Sarah M.',
+    university: 'High School Student',
     avatarColor: 'bg-primary-200',
     avatarTextColor: 'text-primary-700',
   },
   {
     id: 2,
-    text: 'I ordered a research paper for my nursing course and the final document was very detailed and professionally written. My professor specifically appreciated the structure and referencing.',
+    text: 'I really appreciated the personalized approach. My tutor understood exactly where I was struggling and helped me improve step by step.',
     rating: 5,
     name: 'James R.',
-    university: 'University of Leeds, UK',
-    subject: 'Research Paper',
+    university: 'University Student',
     avatarColor: 'bg-primary-soft',
     avatarTextColor: 'text-primary-700',
   },
   {
     id: 3,
-    text: "I've used their assignment writing assistance multiple times now and the experience has always been smooth. Communication was fast, delivery was on time, and the work quality remained consistent.",
+    text: "Excellent tutoring service! The sessions are engaging, professional, and focused on real understanding rather than simply memorizing answers.",
     rating: 5,
-    name: 'Ethan K.',
-    university: 'University of Toronto, Canada',
-    subject: 'Assignment Help',
+    name: 'Emily K.',
+    university: 'Parent',
     avatarColor: 'bg-primary-200',
     avatarTextColor: 'text-primary-700',
   },
@@ -76,7 +73,7 @@ const TestimonialsSection = () => {
 
         {/* Subtitle */}
         <p className="text-[13px] sm:text-[14px] text-text-body text-center max-w-[480px] mb-10 font-medium opacity-70">
-          Real feedback from students who achieved top grades with TutorsFy.
+          Real feedback from students who achieved top grades with TutorPath.
         </p>
 
         {/* ── DESKTOP CAROUSEL ── */}
@@ -141,16 +138,6 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="mt-10">
-          <a href="#"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:scale-[1.04] hover:shadow-[0_8px_28px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200 w-full max-w-xs md:w-auto text-center justify-center">
-            View More Reviews
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-        </div>
 
       </div>
     </section>
@@ -180,27 +167,27 @@ const TestimonialCard = ({ t }) => (
 
     {/* Footer */}
     <div className="flex items-center justify-between pt-4 border-t border-card-border">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 min-w-0">
         {/* Avatar */}
         <div className={`w-10 h-10 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
           <svg className={`w-6 h-6 ${t.avatarTextColor}`} fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
           </svg>
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="flex items-center gap-1">
-            <h4 className="text-text-dark font-bold text-[13px]">{t.name}</h4>
+            <h4 className="text-text-dark font-bold text-[13px] whitespace-nowrap">{t.name}</h4>
             {/* Verified */}
-            <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
             </svg>
           </div>
-          <p className="text-text-body text-[11px] opacity-60">{t.university}</p>
+          <p className="text-text-body text-[11px] opacity-60 whitespace-nowrap">{t.university}</p>
         </div>
       </div>
 
       {/* Subject Badge */}
-      <span className="bg-primary-soft text-brand-purple text-[10.5px] font-bold px-2.5 py-1 rounded-lg border border-primary-border whitespace-nowrap">
+      <span className="shrink-0 bg-primary-soft text-brand-purple text-[10.5px] font-bold px-2.5 py-1 rounded-lg border border-primary-border whitespace-nowrap ml-2">
         {t.subject}
       </span>
     </div>

@@ -4,8 +4,8 @@ const FeaturesSection = () => {
   const features = [
     {
       id: 1,
-      title: 'Expert Academic Writers',
-      description: 'Advanced degree holders with subject-matter expertise and years of academic writing experience.',
+      title: 'Expert Tutors',
+      description: 'Advanced degree holders with subject-matter expertise and years of academic tutoring experience.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385c.132.555-.47 1.016-.946.72l-4.735-2.84a.563.563 0 00-.586 0L6.982 20.54c-.476.297-1.078-.165-.946-.72l1.285-5.385a.562.562 0 00-.182-.557l-4.204-3.602c-.38-.325-.178-.948.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
@@ -14,8 +14,8 @@ const FeaturesSection = () => {
     },
     {
       id: 2,
-      title: '100% Original & Plagiarism Free',
-      description: 'Every paper is written from scratch and checked with powerful plagiarism detection tools.',
+      title: '100% Personalized & Results-Focused',
+      description: 'Every session is tailored to your goals and learning needs to help you truly understand and excel.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -24,8 +24,8 @@ const FeaturesSection = () => {
     },
     {
       id: 3,
-      title: 'On-Time Delivery Always',
-      description: 'We value your time. Get your work delivered before the deadline, every single time.',
+      title: 'Personalized Learning Always',
+      description: 'We value your time. Get focused, engaging tutoring tailored to your learning needs, every time.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -34,8 +34,8 @@ const FeaturesSection = () => {
     },
     {
       id: 4,
-      title: 'Unlimited Revisions',
-      description: 'Your satisfaction is our priority. Request unlimited revisions until you\'re 100% happy.',
+      title: 'Personalized Support',
+      description: 'Your progress is our priority. Get personalized guidance, feedback, and support tailored to your learning goals.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -45,7 +45,7 @@ const FeaturesSection = () => {
     {
       id: 5,
       title: 'Secure & Confidential',
-      description: 'Your personal information and orders are 100% secure and confidential.',
+      description: 'Your personal information and live sessions are 100% secure and confidential.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
@@ -79,7 +79,7 @@ const FeaturesSection = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </span>
-          WHY CHOOSE TUTORSFY
+          WHY CHOOSE TutorsPath
         </div>
 
         {/* Main Heading - Enhanced with subtle underline */}

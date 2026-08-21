@@ -23,7 +23,7 @@ const ReviewsHeader = () => {
           </span>
         </div>
         <p className="text-[#64748b] text-[13.5px] leading-relaxed">
-          Learn more about TutorsFy through recent student experiences. These sample reviews reflect
+          Learn more about TutorsPath through recent student experiences. These sample reviews reflect
           the quality, delivery, and support students can expect from our team.
         </p>
       </div>

@@ -3,68 +3,195 @@ import React from 'react';
 const services = [
   {
     id: 1,
-    title: 'Essays',
-    description: 'Well-structured, original essays crafted to meet your requirements.',
-    items: ['Argumentative Essays', 'Narrative Essays', 'Compare & Contrast Essays'],
+    title: 'Subject Tutoring',
+    description:
+      'Expert help in a wide range of subjects to strengthen your concepts.',
+    items: [
+      'Mathematics',
+      'Science (Physics, Chemistry, Biology)',
+      'English & Literature',
+      'Computer Science',
+      'And More',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 014 15.5v-10z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8 7h8M8 11h8"
+        />
       </svg>
     ),
   },
   {
     id: 2,
-    title: 'Research Papers',
-    description: 'In-depth research with credible sources and proper citations.',
-    items: ['APA, MLA, Chicago, Harvard', 'Thorough Research', 'Plagiarism-Free Content'],
+    title: 'Test Preparation',
+    description:
+      'Focused preparation to help you ace important exams with confidence.',
+    items: [
+      'SAT / ACT',
+      'GRE / GMAT',
+      'IELTS / TOEFL',
+      'AP / IB / A-Level',
+      'And More',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="4" />
+        <path strokeLinecap="round" d="M12 3v3M21 12h-3M12 21v-3M3 12h3" />
       </svg>
     ),
   },
   {
     id: 3,
-    title: 'Dissertations',
-    description: 'High-quality dissertations that meet academic standards.',
-    items: ['Topic Selection & Proposal', 'Chapter Writing', 'Editing & Proofreading'],
+    title: 'Professional Guidance',
+    description:
+      'Get expert guidance on assignments and homework, step by step.',
+    items: [
+      'Concept Explanation',
+      'Problem Solving',
+      'Assignment Support',
+      'Exam Practice',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 20h9"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
+        />
       </svg>
     ),
   },
   {
     id: 4,
-    title: 'Assignments',
-    description: 'Well-researched assignments delivered on time, every time.',
-    items: ['All Subjects & Topics', 'Detailed & Original Content', 'Formatting as Per Guidelines'],
+    title: 'Study Skills Coaching',
+    description:
+      'Improve your study habits, time management, and academic performance.',
+    items: [
+      'Time Management',
+      'Note-Taking Strategies',
+      'Exam Strategies',
+      'Focus & Productivity',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 17l6-6 4 4 8-8"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M17 7h4v4"
+        />
       </svg>
     ),
   },
   {
     id: 5,
-    title: 'Case Studies',
-    description: 'Insightful case studies with clear analysis and recommendations.',
-    items: ['Harvard & APA Format', 'SWOT / PESTLE Analysis', 'Industry-Specific Solutions'],
+    title: 'Live Online Classes',
+    description:
+      'Interactive live classes with expert tutors from anywhere in the world.',
+    items: [
+      'Real-time Doubt Solving',
+      'Interactive Whiteboard',
+      'Recorded Sessions',
+      'Flexible Scheduling',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <rect
+          x="3"
+          y="5"
+          width="18"
+          height="14"
+          rx="2"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M10 9l5 3-5 3V9z"
+        />
       </svg>
     ),
   },
   {
     id: 6,
-    title: 'Reports & More',
-    description: 'Professional reports and custom academic content.',
-    items: ['Business Reports', 'Lab Reports', 'And Much More'],
+    title: 'Academic Support',
+    description:
+      'Ongoing academic support to keep you on track and help you excel.',
+    items: [
+      'Regular Progress Tracking',
+      'Personalized Study Plans',
+      'Feedback & Improvement',
+      '24/7 Student Support',
+    ],
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M18 10a6 6 0 00-12 0"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 10v4a2 2 0 002 2h1M18 10v4a2 2 0 01-2 2h-1"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 20h6"
+        />
       </svg>
     ),
   },
@@ -118,11 +245,11 @@ const ServicesSection = () => {
           <h2 className="text-[26px] sm:text-[32px] lg:text-[38px] font-bold text-text-dark tracking-tight leading-tight mb-2.5">
             Expert Help for{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
-              Every Need
+              Every SUBJECT
             </span>
           </h2>
           <p className="text-[13px] sm:text-[14px] text-text-body max-w-[480px] leading-relaxed opacity-70 font-medium">
-            From essays to research papers, we provide expert help in every academic writing area you need.
+            From <map name=""></map>mathematics to aerospace engineering, we provide expert help in every academic tutoring area you need.
           </p>
         </div>
 
