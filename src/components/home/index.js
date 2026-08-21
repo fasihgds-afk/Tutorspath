@@ -1,0 +1,14 @@
+export { default as HeroSection } from './HeroSection';
+export { default as StatsSection } from './StatsSection';
+export { default as TopWritersSection } from './TopWritersSection';
+export { default as FeaturesSection } from './FeaturesSection';
+export { default as HowItWorksSection } from './HowItWorksSection';
+export { default as CTABannerSection } from './CTABannerSection';
+export { default as GuaranteeSection } from './GuaranteeSection';
+export { default as TrustedBySection } from './TrustedBySection';
+export { default as TestimonialsSection } from './TestimonialsSection';
+export { default as SupportBannerSection } from './SupportBannerSection';
+export { default as ServicesSection } from './ServicesSection';
+export { default as HelpBannerSection } from './HelpBannerSection';
+export { default as SupportSection } from './SupportSection';
+export { default as FAQSection } from './FAQSection';
