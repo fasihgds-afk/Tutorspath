@@ -187,9 +187,7 @@ const TestimonialCard = ({ t }) => (
       </div>
 
       {/* Subject Badge */}
-      <span className="shrink-0 bg-primary-soft text-brand-purple text-[10.5px] font-bold px-2.5 py-1 rounded-lg border border-primary-border whitespace-nowrap ml-2">
-        {t.subject}
-      </span>
+     
     </div>
   </div>
 );

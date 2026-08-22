@@ -79,7 +79,7 @@ const FeaturesSection = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </span>
-          WHY CHOOSE TutorsPath
+          WHY CHOOSE TUTORSPATH
         </div>
 
         {/* Main Heading - Enhanced with subtle underline */}
@@ -97,7 +97,7 @@ const FeaturesSection = () => {
 
         {/* Subtitle */}
         <p className="text-[14px] sm:text-[15px] text-gray-600 text-center max-w-[600px] mb-9 font-medium mt-1">
-          We go beyond writing. We deliver excellence, every time.
+          We go beyond tutoring. We deliver excellence, every time.
         </p>
 
         {/* Cards Grid - Modernized */}

@@ -19,18 +19,16 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="w-full bg-surface-alt py-8 lg:py-16 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
+    <section className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
 
-        {/* Overlapping Image Placeholder — desktop only */}
-        <div className="hidden lg:flex absolute bottom-0 right-[240px] xl:right-[300px] z-10 w-[420px] h-[460px] rounded-3xl border-2 border-dashed border-primary-border bg-gradient-to-t from-primary-soft/50 via-primary-50/20 to-transparent flex-col items-center justify-center p-6 text-center pointer-events-none select-none">
-          <div className="w-16 h-16 rounded-2xl bg-primary-soft text-brand-purple flex items-center justify-center mb-3 shadow-xs">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-          </div>
-          <span className="text-sm font-semibold text-text-body">Student Illustration / Image</span>
-          <span className="text-xs text-text-body mt-1 opacity-60">Image Placeholder Div (Overlapping Layer)</span>
+        {/* Overlapping Image — desktop only */}
+        <div className="hidden lg:block absolute bottom-0 right-[270px] xl:right-[330px] z-10 w-[460px] h-[560px] rounded-3xl overflow-hidden pointer-events-none select-none">
+          <img
+            src="/images/hero.png"
+            alt="Student"
+            className="w-full h-full object-cover object-top"
+          />
         </div>
 
         {/* Grid */}
@@ -130,7 +128,7 @@ const HeroSection = () => {
           <div className="lg:col-span-5 relative w-full flex justify-center lg:justify-end pt-4 lg:pt-0 lg:pr-3">
 
             {/* Form Card */}
-            <div className="bg-surface rounded-[20px] lg:rounded-[24px] shadow-[0_8px_32px_rgba(5,150,105,0.13)] border border-card-border w-full max-w-[420px] lg:max-w-[360px] overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(5,150,105,0.18)] transition-shadow duration-300">
+            <div className="bg-surface rounded-[20px] lg:rounded-[24px] shadow-[0_8px_32px_rgba(5,150,105,0.13)] border border-card-border w-full max-w-[420px] lg:max-w-[330px] overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(5,150,105,0.18)] transition-shadow duration-300">
 
               {/* Banner Header */}
               <div className="absolute -top-5 left-4 right-4 z-30 bg-gradient-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">

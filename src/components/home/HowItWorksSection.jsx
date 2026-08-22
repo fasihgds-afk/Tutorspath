@@ -11,7 +11,7 @@ const steps = [
     ),
   },
   {
-    id: 2, title: 'We Assign the Best Tutors',
+    id: 2, title: 'We Assign the Tutors',
     description: 'We match your guidelines with the most suitable expert in your subject.',
     icon: (
       <svg className="w-9 h-9" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ const HowItWorksSection = () => {
         </h2>
 
         <p className="text-[14px] sm:text-[15px] text-text-body text-center max-w-[500px] mb-10 font-medium opacity-70">
-          Get high-quality academic content in just 5 easy steps.
+          Get high-quality tutoring in just 5 easy steps.
         </p>
 
         <div className="relative w-full">

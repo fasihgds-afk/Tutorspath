@@ -16,7 +16,7 @@ const features = [
   {
     id: 2,
     title: '100% Confidentiality',
-    description: 'Your personal information and orders are kept completely secure with us.',
+    description: 'Your personal information and sessions are kept completely secure with us.',
     badge: 'Secure',
     badgeLabel: 'Your Privacy Matters',
     icon: (
@@ -28,7 +28,7 @@ const features = [
   {
     id: 3,
     title: 'Unlimited Revisions',
-    description: 'We offer unlimited revisions until you are 100% satisfied with your paper.',
+    description: 'We offer unlimited revisions until you are 100% satisfied with your tutoring.',
     badge: 'Free',
     badgeLabel: 'Your Satisfaction',
     icon: (
