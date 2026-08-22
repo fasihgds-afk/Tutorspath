@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TopWritersSection = () => {
   const writers = [
@@ -140,12 +141,12 @@ const TopWritersSection = () => {
               </div>
 
               {/* Hire Button */}
-              <button 
-                type="button"
-                className="w-full bg-gradient-to-r from-brand-start via-brand-purple to-brand-accent text-white font-semibold py-2.5 px-4 rounded-xl shadow-xs hover:opacity-95 transition text-[13px] cursor-pointer"
+              <Link
+                to="/account/register"
+                className="w-full bg-gradient-to-r from-brand-start via-brand-purple to-brand-accent text-white font-semibold py-2.5 px-4 rounded-xl shadow-xs hover:opacity-95 transition text-[13px] text-center block"
               >
                 Hire
-              </button>
+              </Link>
             </div>
           ))}
         </div>

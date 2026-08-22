@@ -37,7 +37,7 @@ const Register = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-[14px] sm:text-[15px] text-text-body font-medium opacity-75 max-w-[480px]">
+            <p className="text-[15px] sm:text-[16px] text-text-body font-medium opacity-70 max-w-[460px] leading-relaxed -mt-1 tracking-tight">
               Join thousands of students who trust TutorsPath for high-quality tutoring services.
             </p>
 
