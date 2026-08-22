@@ -108,14 +108,14 @@ const SupportSection = () => {
             </div>
 
             {/* Right: Agent Illustration */}
-         {/* Right: Agent Illustration */}
-<div className="lg:col-span-5 flex justify-center items-center">
-  <img
-    src="/images/CTA-3.png"
-    alt="Academic specialist"
-    className="w-full max-w-[400px] h-auto object-contain"
-  />
-</div>
+            {/* Right: Agent Illustration */}
+            <div className="lg:col-span-5 flex justify-center items-center">
+              <img
+                src="/images/CTA-3.png"
+                alt="Academic specialist"
+                className="w-full max-w-[400px] h-auto object-contain"
+              />
+            </div>
 
           </div>
         </div>
@@ -156,7 +156,7 @@ const SupportSection = () => {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
-              
+
 
                 <a href="tel:+442033185601"
                   className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
@@ -166,7 +166,7 @@ const SupportSection = () => {
                   +92-329-5128671
                 </a>
 
-                <a href="mailto:care@@tutorspath.com"
+                <a href="mailto:care@tutorspath.com"
                   className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
                   <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
