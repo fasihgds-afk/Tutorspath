@@ -82,9 +82,9 @@ const TrustedBySection = () => {
 
           {/* Student image — desktop only */}
           <div className="hidden lg:flex relative w-full lg:w-[18%] justify-end items-end min-h-[180px] shrink-0">
-            <div className="absolute right-0 bottom-0 w-[140px] h-[140px] bg-primary-soft rounded-full z-0" />
+            {/* <div className="absolute right-0 bottom-0 w-[10px] h-[140px] bg-primary-soft rounded-full z-0" /> */}
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+              src="/images/CTA-2.png"
               alt="Student typing on laptop"
               className="relative z-10 max-h-[200px] object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500"
             />

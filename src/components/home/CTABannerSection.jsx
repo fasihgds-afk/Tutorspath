@@ -9,9 +9,9 @@ const CTABannerSection = () => {
 
           {/* Image — desktop only */}
           <div className="hidden lg:flex relative w-full lg:w-[30%] justify-center items-end min-h-[190px] lg:min-h-[210px]">
-            <div className="absolute left-4 bottom-0 w-[160px] h-[160px] bg-primary rounded-full opacity-20 z-0"></div>
+            {/* <div className="absolute left-4 bottom-0 w-[160px] h-[160px] bg-primary rounded-full opacity-20 z-0"></div> */}
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+              src="/images/CTA-1.png"
               alt="Student giving thumbs up"
               className="relative z-10 max-h-[210px] object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500"
             />

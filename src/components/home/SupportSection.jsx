@@ -108,42 +108,14 @@ const SupportSection = () => {
             </div>
 
             {/* Right: Agent Illustration */}
-            <div className="lg:col-span-5 flex justify-center items-center">
-              <div className="w-full bg-primary-soft rounded-[20px] border border-primary-border p-5 flex flex-col items-center relative overflow-hidden hover:shadow-md transition-shadow duration-300">
-
-                {/* SVG Illustration */}
-                <div className="w-full flex justify-center items-end py-4">
-                  <svg className="w-full max-w-[280px] h-auto drop-shadow-md" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Desk */}
-                    <path d="M10 170H310C310 170 300 190 280 190H40C20 190 10 170 10 170Z" fill="#d1fae5" />
-                    {/* Laptop base */}
-                    <path d="M90 170H230L215 145H105L90 170Z" fill="#a7f3d0" />
-                    {/* Laptop screen */}
-                    <path d="M105 145H215V80H105V145Z" fill="#6ee7b7" />
-                    <path d="M112 90H208V138H112V90Z" fill="#059669" />
-                    {/* Coffee Cup */}
-                    <rect x="235" y="140" width="20" height="30" rx="3" fill="#047857" />
-                    <path d="M255 148H260C263 148 263 158 260 158H255" stroke="#047857" strokeWidth="2" />
-                    {/* Plant */}
-                    <path d="M275 150L280 170H295L300 150H275Z" fill="#d1fae5" />
-                    <path d="M287 150V130" stroke="#22c55e" strokeWidth="3" />
-                    <circle cx="287" cy="125" r="10" fill="#16a34a" />
-                    {/* Agent head */}
-                    <circle cx="160" cy="70" r="28" fill="#a7f3d0" />
-                    {/* Shirt */}
-                    <path d="M130 145C130 115 190 115 190 145V170H130V145Z" fill="#059669" />
-                    {/* Headset */}
-                    <path d="M136 55C136 40 184 40 184 55" stroke="#047857" strokeWidth="3" fill="none" />
-                    <path d="M180 75C180 85 170 90 165 88" stroke="#047857" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                  </svg>
-                </div>
-
-                <div className="text-center mt-1">
-                  <span className="text-text-dark font-bold text-[14px]">Ready to help you excel</span>
-                  <p className="text-text-body text-[11px] opacity-70 mt-0.5">Connect with a live academic specialist instantly.</p>
-                </div>
-              </div>
-            </div>
+         {/* Right: Agent Illustration */}
+<div className="lg:col-span-5 flex justify-center items-center">
+  <img
+    src="/images/CTA-3.png"
+    alt="Academic specialist"
+    className="w-full max-w-[400px] h-auto object-contain"
+  />
+</div>
 
           </div>
         </div>
