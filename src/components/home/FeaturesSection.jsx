@@ -114,7 +114,7 @@ const FeaturesSection = () => {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-purple/[0.03] to-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
               {/* Icon - Enhanced with gradient and glow */}
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-brand-purple/10 to-primary/10 border border-brand-purple/10 flex items-center justify-center text-brand-purple group-hover:shadow-md group-hover:shadow-brand-purple/5 transition-all duration-300">
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-primary-soft border border-brand-purple/10 flex items-center justify-center text-brand-purple group-hover:bg-primary group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-brand-purple/20 transition-all duration-300">
                 {feature.icon}
               </div>
 
@@ -134,16 +134,17 @@ const FeaturesSection = () => {
                 </p>
 
                 {/* Link - Enhanced with arrow animation */}
-                <a
-                  href="#"
-                  className="inline-flex items-center text-[12px] font-semibold text-brand-purple gap-1.5 group/link"
+                <button
+                  type="button"
+                  onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
+                  className="inline-flex items-center text-[12px] font-semibold text-brand-purple gap-1.5 group/link cursor-pointer"
                 >
                   <span className="relative">
                     Learn more
                     <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-brand-purple group-hover/link:w-full transition-all duration-300"></span>
                   </span>
                   <span className="text-[14px] group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 transition-transform duration-300">&rarr;</span>
-                </a>
+                </button>
               </div>
             </div>
           ))}

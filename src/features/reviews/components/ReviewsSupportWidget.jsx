@@ -17,7 +17,9 @@ const ReviewsSupportWidget = () => {
       {/* Buttons */}
       <div className="flex flex-col gap-2 pt-1">
         <a
-          href="tel:+442033185601"
+          href="https://wa.me/923295128671"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-4 py-2.5 border border-slate-200 rounded-xl text-[13px] font-semibold text-slate-700 hover:border-primary hover:text-primary hover:bg-primary-soft transition-colors"
         >
           <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -37,7 +39,7 @@ const ReviewsSupportWidget = () => {
         </button>
 
         <a
-          href="mailto:support@@tutorspath.com"
+          href="mailto:care@tutorspath.com"
           className="flex items-center gap-2.5 px-4 py-2.5 border border-slate-200 rounded-xl text-[13px] font-semibold text-slate-700 hover:border-primary hover:text-primary hover:bg-primary-soft transition-colors"
         >
           <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

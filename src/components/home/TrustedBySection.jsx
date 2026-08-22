@@ -52,7 +52,7 @@ const TrustedBySection = () => {
               RESULTS THAT MATTER
             </div>
 
-            <h2 className="text-[18px] lg:text-[19px] font-semibold text-text-dark leading-snug tracking-tight mb-2.5">
+            <h2 className="text-[15px] lg:text-[16px] font-semibold text-text-dark leading-snug tracking-tight mb-2.5">
               Trusted by{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">Thousands.</span>
               <br />

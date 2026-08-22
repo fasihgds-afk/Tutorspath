@@ -64,7 +64,7 @@ const services = [
     id: 3,
     title: 'Professional Guidance',
     description:
-      'Get expert guidance on assignments and homework, step by step.',
+      'Get expert guidance on subject, step by step.',
     items: [
       'Concept Explanation',
       'Problem Solving',
@@ -224,9 +224,13 @@ const ServiceCard = ({ service, showItems }) => (
         </li>
       ))}
     </ul>
-    <a href="#" className="text-brand-purple text-[11px] font-bold hover:text-primary hover:underline transition-colors duration-200">
+    <button
+      type="button"
+      onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
+      className="text-brand-purple text-[11px] font-bold hover:text-primary hover:underline transition-colors duration-200 cursor-pointer"
+    >
       Learn more →
-    </a>
+    </button>
   </div>
 );
 
@@ -274,12 +278,16 @@ const ServicesSection = () => {
                   </p>
                 </div>
                 <div className="mt-auto pt-4 border-t border-surface/20">
-                  <a href="#" className="group/link inline-flex items-center gap-2 text-surface font-semibold text-[13px] hover:gap-3 transition-all duration-300">
+                  <button
+                    type="button"
+                    onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
+                    className="group/link inline-flex items-center gap-2 text-surface font-semibold text-[13px] hover:gap-3 transition-all duration-300 cursor-pointer"
+                  >
                     Explore All Services
                     <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

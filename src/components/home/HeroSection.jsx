@@ -7,6 +7,8 @@ const HeroSection = () => {
     phone: '',
     message: '',
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,7 +17,11 @@ const HeroSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Contact Request:', formData);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 2500);
   };
 
   return (
@@ -145,6 +151,37 @@ const HeroSection = () => {
               {/* Form Body */}
               <form onSubmit={handleSubmit} className="pt-8 px-4 lg:px-5 pb-6 space-y-3">
 
+                {/* Loading State */}
+                {loading && (
+                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
+                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
+                      <svg className="w-7 h-7 text-primary animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                      </svg>
+                    </div>
+                    <p className="text-[13px] font-semibold text-text-body opacity-70">Sending your message...</p>
+                  </div>
+                )}
+
+                {/* Thank You Message */}
+                {submitted && (
+                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
+                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
+                      <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-[17px] font-bold text-text-dark">Thank You!</h3>
+                    <p className="text-[13px] text-text-body opacity-70 max-w-[220px]">
+                      Your message has been received. We'll get back to you within 10 minutes.
+                    </p>
+                  </div>
+                )}
+
+                {/* Form Fields — hidden after submit or while loading */}
+                <div className={submitted || loading ? 'hidden' : ''}>
+
                 {/* Name */}
                 <div className="group flex items-center gap-3">
                   <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
@@ -237,14 +274,16 @@ const HeroSection = () => {
                 </button>
 
                 {/* Security info */}
-                <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
-                  <div className="flex items-center gap-1 text-[11px] text-text-body">
-                    <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-                    </svg>
-                    <span>Your information is safe with us</span>
+                  <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
+                    <div className="flex items-center gap-1 text-[11px] text-text-body">
+                      <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
+                      </svg>
+                      <span>Your information is safe with us</span>
+                    </div>
                   </div>
-                </div>
+
+                </div>{/* end hidden wrapper */}
 
               </form>
             </div>

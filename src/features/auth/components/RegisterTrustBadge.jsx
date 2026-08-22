@@ -1,32 +1,26 @@
 import React from 'react';
 
-const avatars = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
-  'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80',
-];
-
 const RegisterTrustBadge = () => {
   return (
-    <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex items-center gap-4 w-full max-w-sm hover:shadow-md transition-all duration-200">
-      <div className="flex -space-x-2 overflow-hidden flex-shrink-0">
-        {avatars.map((src, i) => (
-          <img
-            key={i}
-            className="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
-            src={src}
-            alt="Student"
-          />
-        ))}
-      </div>
-
-      <div>
-        <div className="flex items-center gap-1 text-amber-400 mb-0.5">
-          <span className="text-sm font-bold text-slate-800 mr-0.5">4.9/5</span>
-          {'★★★★★'}
-          <span className="text-slate-400 text-[11px] font-normal ml-1">(2,340+)</span>
+    <div className="bg-surface rounded-2xl p-3.5 shadow-md border border-card-border flex items-center justify-between gap-3 w-full lg:max-w-[410px] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+      <div className="flex flex-col">
+        <div className="flex items-center gap-1.5">
+          <span className="text-[17px] font-extrabold text-text-dark">4.8/5</span>
+          <div className="flex text-primary-200 text-[13px]">★★★★★</div>
         </div>
-        <p className="text-slate-400 text-xs">Students love our expert help!</p>
+        <span className="text-[10px] text-text-body font-medium opacity-60">Based on 2,000+ Reviews</span>
+      </div>
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 font-bold text-[12px] text-text-dark">
+          <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0l3.709 7.513 8.291 1.206-6 5.846 1.418 8.257-7.418-3.902-7.418 3.902 1.418-8.257-6-5.846 8.291-1.206z" />
+          </svg>
+          <span>Trustpilot</span>
+        </div>
+        <div className="flex items-center gap-0.5 font-bold text-[12px] text-text-dark">
+          <span className="text-primary text-[14px]">@</span>
+          <span className="tracking-tight">BizProbe</span>
+        </div>
       </div>
     </div>
   );

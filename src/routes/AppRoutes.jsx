@@ -14,9 +14,10 @@ const AppRoutes = () => {
     <Routes>
       {/* Public Routes with Full Public Navbar & Footer */}
       <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/account/register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Route>
 

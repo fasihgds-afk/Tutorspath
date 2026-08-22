@@ -7,8 +7,7 @@ const items = [
   'On-time delivery',
   'Authentic sources',
   '24/7 customer support',
-  'Confidential and secure',
-  'Unlimited revisions',
+  'Confidential and secure'
 ];
 
 const WhyChooseUs = () => {

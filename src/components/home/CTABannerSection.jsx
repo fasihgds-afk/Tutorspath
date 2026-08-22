@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CTABannerSection = () => {
   return (
@@ -22,7 +23,7 @@ const CTABannerSection = () => {
             <h2 className="text-[20px] lg:text-[22px] font-bold text-text-dark leading-snug tracking-tight">
               Maximize Your Learing Growth with{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
-                Exceptional Academic Assistance!
+               Exceptional Tutoring Service!
               </span>
             </h2>
             <p className="text-text-body text-[13px] lg:text-[13.5px] mt-2.5 leading-relaxed font-normal opacity-70">
@@ -48,10 +49,10 @@ const CTABannerSection = () => {
               ))}
             </ul>
 
-            <a href="#"
+            <Link to="/account/register"
               className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(5,150,105,0.3)] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200">
               Book Your Demo <span className="text-base leading-none">&rarr;</span>
-            </a>
+            </Link>
           </div>
 
         </div>

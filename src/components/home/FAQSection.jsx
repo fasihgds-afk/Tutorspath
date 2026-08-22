@@ -93,9 +93,10 @@ const FAQSection = () => {
 
             {/* Buttons */}
             <div className="flex flex-col gap-3 mb-6">
-              <a
-                href="#"
-                className="group w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-[0_4px_12px_rgba(5,150,105,0.25)] hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(5,150,105,0.35)] active:scale-[0.97] transition-all duration-200"
+              <button
+                type="button"
+                onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
+                className="group w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-[0_4px_12px_rgba(5,150,105,0.25)] hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(5,150,105,0.35)] active:scale-[0.97] transition-all duration-200 cursor-pointer"
               >
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -104,7 +105,7 @@ const FAQSection = () => {
                 <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
+              </button>
 
               <a
                 href="mailto:care@tutorspath.com"

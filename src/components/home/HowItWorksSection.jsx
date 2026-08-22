@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -60,7 +61,7 @@ const HowItWorksSection = () => {
         </h2>
 
         <p className="text-[14px] sm:text-[15px] text-text-body text-center max-w-[500px] mb-10 font-medium opacity-70">
-          Get high-quality tutoring in just 5 easy steps.
+          Get high-quality tutoring in just 4 easy steps.
         </p>
 
         <div className="relative w-full">
@@ -110,10 +111,10 @@ const HowItWorksSection = () => {
 
         {/* CTA Button */}
         <div className="mt-10 w-full flex justify-center">
-          <a href="#"
+          <Link to="/account/register"
             className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:scale-[1.04] hover:shadow-[0_8px_28px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200 w-full max-w-xs lg:w-auto">
             Get Started Now <span className="text-base leading-none">&rarr;</span>
-          </a>
+          </Link>
         </div>
 
       </div>
