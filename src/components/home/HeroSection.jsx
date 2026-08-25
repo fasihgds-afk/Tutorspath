@@ -48,7 +48,7 @@ const HeroSection = () => {
               <svg className="w-4 h-4 text-brand-purple shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
               </svg>
-              <span>Trusted by 8,000+ Students Worldwide</span>
+              <span>TrustedDDD by 8,000+ Students Worldwide</span>
             </div>
 
             {/* Main Heading */}
@@ -121,9 +121,11 @@ const HeroSection = () => {
                   </svg>
                   <span>Trustpilot</span>
                 </div>
-                <div className="flex items-center gap-0.5 font-bold text-[12px] text-text-dark">
-                  <span className="text-primary text-[14px]">@</span>
-                  <span className="tracking-tight">BizProbe</span>
+                <div className="flex items-center gap-1 font-bold text-[12px] text-text-dark">
+                  <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                  <span className="tracking-tight">reviews.io</span>
                 </div>
               </div>
             </div>

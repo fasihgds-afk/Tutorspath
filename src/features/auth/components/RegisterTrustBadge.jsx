@@ -17,9 +17,11 @@ const RegisterTrustBadge = () => {
           </svg>
           <span>Trustpilot</span>
         </div>
-        <div className="flex items-center gap-0.5 font-bold text-[12px] text-text-dark">
-          <span className="text-primary text-[14px]">@</span>
-          <span className="tracking-tight">BizProbe</span>
+        <div className="flex items-center gap-1 font-bold text-[12px] text-text-dark">
+          <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+          </svg>
+          <span className="tracking-tight">reviews.io</span>
         </div>
       </div>
     </div>
