@@ -2,21 +2,22 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
-const Footer = () => {
+const Footer1 = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const homePhone = SITE_CONFIG.phoneHome || SITE_CONFIG.phone;
+  const home1Phone = SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone;
 
   const handleHashLink = (e, hash) => {
     e.preventDefault();
-    if (location.pathname === '/' || location.pathname === '/home') {
+    if (location.pathname === '/home-1' || location.pathname === '/home1' || location.pathname === '/') {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      navigate(`/#${hash}`);
+      navigate(`/home-1#${hash}`);
     }
   };
+
   return (
     <footer className="w-full bg-slate-950 font-sans antialiased text-slate-300 pt-16 pb-10 border-t border-slate-800/80 relative overflow-hidden">
       {/* Subtle emerald ambient glow in background */}
@@ -30,7 +31,7 @@ const Footer = () => {
           {/* Column 1: Logo & Description (Span 2 on lg) */}
           <div className="lg:col-span-2 flex flex-col pr-0 lg:pr-8">
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center mb-5 group w-fit">
+            <Link to="/home-1" className="flex items-center mb-5 group w-fit">
               <img
                 src="/TutorsPath Logo White.svg"
                 alt="TutorsPath"
@@ -40,7 +41,7 @@ const Footer = () => {
 
             {/* Tagline */}
             <p className="text-slate-400 text-sm leading-relaxed max-w-[340px] mb-6">
-              Your trusted partner for high-quality academic writing and coursework help. We're here to support your academic success at every step.
+              Your trusted partner for high-quality academic tutoring. We're here to support your academic success at every step.
             </p>
 
           </div>
@@ -49,12 +50,12 @@ const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Our Services</h3>
             <ul className="space-y-3">
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Essay Writing</a></li>
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Research Paper Writing</a></li>
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Assignment Help</a></li>
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Coursework Help</a></li>
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Dissertation & Thesis</a></li>
-              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Case Study Writing</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Subject Tutoring</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Test Preparation</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Professional Guidance</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Study Skills Coaching</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Live Online Classes</a></li>
+              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">Academic Support</a></li>
             </ul>
           </div>
 
@@ -62,14 +63,14 @@ const Footer = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">Home</Link></li>
+              <li><Link to="/home-1" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">Home</Link></li>
               <li>
-                <a href="/#top-writers" onClick={(e) => handleHashLink(e, 'top-writers')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
-                  Top Writers
+                <a href="/home-1#top-writers" onClick={(e) => handleHashLink(e, 'top-writers')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
+                  Top Tutors
                 </a>
               </li>
               <li>
-                <a href="/#how-it-works" onClick={(e) => handleHashLink(e, 'how-it-works')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
+                <a href="/home-1#how-it-works" onClick={(e) => handleHashLink(e, 'how-it-works')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
                   How It Works
                 </a>
               </li>
@@ -79,12 +80,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
+                <a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
                   All Services
                 </a>
               </li>
               <li>
-                <a href="/#faqs" onClick={(e) => handleHashLink(e, 'faqs')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
+                <a href="/home-1#faqs" onClick={(e) => handleHashLink(e, 'faqs')} className="text-slate-400 hover:text-emerald-400 text-sm transition-colors cursor-pointer">
                   FAQs
                 </a>
               </li>
@@ -96,11 +97,11 @@ const Footer = () => {
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Contact Us</h3>
             <ul className="space-y-3">
               <li>
-                <a href={homePhone.href} className="flex items-center gap-2.5 text-slate-400 hover:text-emerald-400 text-xs sm:text-sm transition-colors">
+                <a href={home1Phone.href} className="flex items-center gap-2.5 text-slate-400 hover:text-emerald-400 text-xs sm:text-sm transition-colors">
                   <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                   </svg>
-                  {homePhone.display}
+                  {home1Phone.display}
                 </a>
               </li>
               <li>
@@ -215,11 +216,9 @@ const Footer = () => {
 
         </div>
 
-     
-
       </div>
     </footer>
   );
 };
 
-export default Footer;
+export default Footer1;

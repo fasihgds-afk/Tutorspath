@@ -54,21 +54,21 @@ const TopWritersSection = () => {
           <svg className="w-4 h-4 text-brand-purple" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd"></path>
           </svg>
-          Our Top Writers
+          Our Top Tutors
         </div>
 
         {/* Main Heading */}
         <h2 className="text-[28px] sm:text-[34px] lg:text-[38px] font-bold text-gray-900 text-center tracking-tight leading-snug max-w-[800px] mb-2.5">
           Meet Our{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-primary">
-            Top 3 Assignment Writers Experts
+            Top 3 Tutors
           </span>{' '}
-          out of 500+ PhD Writers
+          out of 500+ PhD Tutors
         </h2>
 
         {/* Subtitle */}
         <p className="text-[14px] sm:text-[15px] text-gray-600 text-center max-w-[600px] mb-8 font-medium">
-          Handpicked experts with proven records of success in academic writing across various subjects.
+          Handpicked experts with proven records of success in academic tutoring across various subjects.
         </p>
 
         {/* Cards Grid */}
@@ -113,7 +113,7 @@ const TopWritersSection = () => {
                 <div className="bg-gray-50 rounded-xl p-2.5 grid grid-cols-3 gap-1.5 border border-gray-100 mb-3.5 text-center">
                   <div>
                     <div className="text-[13px] font-extrabold text-gray-900">{writer.orders}</div>
-                    <div className="text-[10px] text-gray-500 font-medium mt-0.5">Eassys Written</div>
+                    <div className="text-[10px] text-gray-500 font-medium mt-0.5">Sessions</div>
                   </div>
                   <div className="border-x border-gray-200">
                     <div className="text-[13px] font-extrabold text-gray-900">{writer.successRate}</div>
@@ -140,14 +140,6 @@ const TopWritersSection = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Hire Button */}
-              <Link
-                to={SITE_CONFIG.routes.register}
-                className="w-full bg-gradient-to-r from-brand-start via-brand-purple to-brand-accent text-white font-semibold py-2.5 px-4 rounded-xl shadow-xs hover:opacity-95 transition text-[13px] text-center block"
-              >
-                Hire
-              </Link>
             </div>
           ))}
         </div>

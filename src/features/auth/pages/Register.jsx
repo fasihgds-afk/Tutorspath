@@ -2,7 +2,6 @@ import React from 'react';
 import RegisterForm from '../components/RegisterForm';
 import RegisterPerks from '../components/RegisterPerks';
 import RegisterTrustBadge from '../components/RegisterTrustBadge';
-import authApi from '../api/authApi';
 
 const Register = () => {
   const handleRegister = async (payload) => {

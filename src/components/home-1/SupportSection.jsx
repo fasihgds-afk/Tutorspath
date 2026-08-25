@@ -17,7 +17,7 @@ const features = [
   {
     id: 2,
     title: '100% Confidentiality',
-    description: 'Your personal information and assignment details are kept completely secure with us.',
+    description: 'Your personal information and sessions are kept completely secure with us.',
     badge: 'Secure',
     badgeLabel: 'Your Privacy Matters',
     icon: (
@@ -29,7 +29,7 @@ const features = [
   {
     id: 3,
     title: 'Unlimited Revisions',
-    description: 'We offer unlimited revisions until you are 100% satisfied with our writing.',
+    description: 'We offer unlimited revisions until you are 100% satisfied with our tutoring.',
     badge: 'Free',
     badgeLabel: 'Your Satisfaction',
     icon: (
@@ -159,12 +159,12 @@ const SupportSection = () => {
               <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
 
 
-                <a href={SITE_CONFIG.phone.href}
+                <a href={SITE_CONFIG.phoneHome1.href}
                   className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
                   <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  {SITE_CONFIG.phone.display}
+                  {SITE_CONFIG.phoneHome1.display}
                 </a>
 
                 <a href={SITE_CONFIG.email.href}

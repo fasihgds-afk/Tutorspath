@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SITE_CONFIG } from '../../../config/siteConfig';
 
 // ─── Field wrapper ────────────────────────────────────────────────────────────
 const FieldWrapper = ({ label, error, children }) => (
@@ -192,7 +193,7 @@ const LoginForm = ({ onSubmit }) => {
           {/* Footer */}
           <p className="text-center text-slate-400 text-xs mt-1">
             Don't have an account?{' '}
-            <Link to="/account/register" className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+            <Link to={SITE_CONFIG.routes.register} className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
               Create Account
             </Link>
           </p>

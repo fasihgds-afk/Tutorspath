@@ -4,63 +4,33 @@ import { SITE_CONFIG } from '../../config/siteConfig';
 const faqs = [
   {
     id: 1,
-    question: 'How do you guarantee plagiarism-free writing?',
+    question: 'What subjects do TutorsPath tutors teach?',
     answer:
-      'Our work process includes a dedicated quality assurance team that checks every order using authentic plagiarism detection tools, including Turnitin. Our experts conduct extensive research to provide original academic writing assistance. You can also request a plagiarism report to verify the originality of your order.',
+      'We offer tutoring across a wide range of subjects, including Mathematics, Science, English, Computer Science, Economics, and more, from school level through university.',
   },
   {
     id: 2,
-    question: 'Will the writer work according to my order guidelines?',
+    question: 'Are the tutoring sessions conducted online?',
     answer:
-      'Yes, certainly. Once you place your order, we assign the most suitable writer who carefully reviews your guidelines and creates an outline to ensure the paper follows your requirements. We only contact you when important information or guidelines are missing.',
+      'Yes. TutorsPath provides convenient online tutoring sessions, allowing students to learn from qualified tutors from anywhere in the world.',
   },
   {
     id: 3,
-    question: 'How fast can you write my paper?',
+    question: 'Can I choose my own tutor?',
     answer:
-      'Our subject-matter experts can deliver papers in as little as 3 hours, depending on the requirements and deadline. We always do our best to complete orders on time, and 99% of our orders are completed and delivered before the deadline.',
+      'Yes. You can explore available tutors based on their subject expertise, academic level, experience, and availability, then choose the tutor who best fits your needs.',
   },
   {
     id: 4,
-    question: 'How will you deliver my order?',
+    question: 'How long is each tutoring session?',
     answer:
-      'Once your expert completes the order, the finished file will be uploaded to your user area. You can log in to your account to access it, and we will also send the completed file to your registered email address.',
+      "Session length can vary depending on the student's requirements. You can select the duration that works best for your learning goals when booking your session.",
   },
   {
     id: 5,
-    question: 'Can I request a revision for my paper?',
+    question: 'Can tutoring help me prepare for exams?',
     answer:
-      'Yes. If you need any changes, you can request a revision free of charge. Simply use your user area to submit your revision requirements. You can also contact our 24/7 live support team for updates regarding your revision.',
-  },
-  {
-    id: 6,
-    question: 'Can I talk to my writer?',
-    answer:
-      'Yes, you can communicate with your writer regarding questions or specific requirements. You can send a message through our 24/7 live chat or contact our support team, and your writer will respond as soon as possible.',
-  },
-  {
-    id: 7,
-    question: 'Is your assistance confidential?',
-    answer:
-      'Yes. All interactions between clients, writers, and our company are kept strictly confidential. Your conversations and personal information are private and are never shared with third-party companies.',
-  },
-  {
-    id: 8,
-    question: 'How can I trust your company?',
-    answer:
-      'We understand the importance of choosing a reliable academic assistance service. Your funds remain secure until the project is completed according to your requirements. We follow applicable international standards and offer a money-back guarantee subject to our terms and conditions.',
-  },
-  {
-    id: 9,
-    question: 'What types of discounts do you offer?',
-    answer:
-      'We offer discounts on orders to make our services more affordable. We also provide bulk discounts, with the discount percentage increasing based on the number of pages included in your order.',
-  },
-  {
-    id: 10,
-    question: 'What is your payment process?',
-    answer:
-      'Once you finalize your order, you can deposit the required amount through your user area. The funds remain secure while the project is being completed. Once the project meets your agreed requirements, the payment can be released to the writer.',
+      'Absolutely. Our tutors can provide personalized exam preparation, help identify areas where you need improvement, explain difficult concepts, and develop a focused study plan.',
   },
 ];
 
@@ -180,10 +150,11 @@ const FAQSection = () => {
               return (
                 <div
                   key={faq.id}
-                  className={`rounded-[16px] border overflow-hidden transition-all duration-300 ${isOpen
-                    ? 'border-primary-border shadow-[0_4px_20px_rgba(5,150,105,0.08)]'
-                    : 'border-card-border shadow-sm hover:border-primary-border hover:shadow-md'
-                    } bg-surface`}
+                  className={`rounded-[16px] border overflow-hidden transition-all duration-300 ${
+                    isOpen
+                      ? 'border-primary-border shadow-[0_4px_20px_rgba(5,150,105,0.08)]'
+                      : 'border-card-border shadow-sm hover:border-primary-border hover:shadow-md'
+                  } bg-surface`}
                 >
                   <button
                     onClick={() => toggle(faq.id)}

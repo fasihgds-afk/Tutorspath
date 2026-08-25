@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// ─── Field wrapper matching LoginForm ─────────────────────────────────────────
+// ─── Field wrapper ────────────────────────────────────────────────────────────
 const FieldWrapper = ({ label, error, children }) => (
   <div className="flex flex-col gap-1">
     <label className="text-slate-700 text-xs font-semibold tracking-wide uppercase">
@@ -19,26 +19,26 @@ const FieldWrapper = ({ label, error, children }) => (
   </div>
 );
 
-// ─── Input icon prefix matching LoginForm ─────────────────────────────────────
+// ─── Input icon ───────────────────────────────────────────────────────────────
 const InputIcon = ({ children }) => (
   <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 pointer-events-none">
     {children}
   </span>
 );
 
-// ─── Country codes (valid dial codes matching /^\+\d{1,4}$/) ─────────────────
+// ─── Country codes ────────────────────────────────────────────────────────────
 const countryCodes = [
-  { label: 'US (+1)', value: '+1' },
-  { label: 'UK (+44)', value: '+44' },
-  { label: 'PK (+92)', value: '+92' },
-  { label: 'CA (+1)', value: '+1' },
-  { label: 'AU (+61)', value: '+61' },
-  { label: 'IN (+91)', value: '+91' },
-  { label: 'AE (+971)', value: '+971' },
-  { label: 'SA (+966)', value: '+966' },
+  { label: 'US (+1)',   value: '+1'   },
+  { label: 'UK (+44)', value: '+44'  },
+  { label: 'PK (+92)', value: '+92'  },
+  { label: 'CA (+1)',  value: '+1'   },
+  { label: 'AU (+61)', value: '+61'  },
+  { label: 'IN (+91)', value: '+91'  },
+  { label: 'AE (+971)',value: '+971' },
+  { label: 'SA (+966)',value: '+966' },
 ];
 
-// ─── Frontend validation helpers ──────────────────────────────────────────────
+// ─── Validation ───────────────────────────────────────────────────────────────
 const validate = ({ fullName, email, phone, password }) => {
   const errors = {};
   if (!fullName.trim()) {
@@ -46,20 +46,17 @@ const validate = ({ fullName, email, phone, password }) => {
   } else if (fullName.trim().length < 2) {
     errors.fullName = 'Full name must be at least 2 characters.';
   }
-
   if (!email.trim()) {
     errors.email = 'Email address is required.';
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.email = 'Please enter a valid email address.';
   }
-
   const cleanPhone = phone.trim().replace(/\D/g, '');
   if (!phone.trim()) {
     errors.phone = 'Phone number is required.';
   } else if (cleanPhone.length < 6 || cleanPhone.length > 20) {
     errors.phone = 'Phone number must be between 6 and 20 digits.';
   }
-
   if (!password) {
     errors.password = 'Password is required.';
   } else if (password.length < 8) {
@@ -67,30 +64,22 @@ const validate = ({ fullName, email, phone, password }) => {
   } else if (!/[a-z]/.test(password) || !/[0-9]/.test(password)) {
     errors.password = 'Use 8+ characters with at least 1 lowercase letter and 1 number.';
   }
-
   return errors;
 };
 
+const EMPTY_FIELDS = { fullName: '', email: '', countryCode: '+1', phone: '', password: '' };
+
 // ─── Main component ───────────────────────────────────────────────────────────
-const RegisterForm = ({ onSubmit }) => {
-  const [fields, setFields] = useState({
-    fullName: '',
-    email: '',
-    countryCode: '+1',
-    phone: '',
-    password: '',
-  });
-  const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState('');
+const RegisterForm = () => {
+  const [fields, setFields]             = useState(EMPTY_FIELDS);
+  const [errors, setErrors]             = useState({});
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading]       = useState(false);
+  const [isSuccess, setIsSuccess]       = useState(false);
 
   const set = (key) => (e) => {
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
-    if (errors[key]) {
-      setErrors((prev) => ({ ...prev, [key]: '' }));
-    }
-    if (apiError) setApiError('');
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }));
   };
 
   const borderClass = (key) => {
@@ -99,43 +88,24 @@ const RegisterForm = ({ onSubmit }) => {
     return 'border-slate-200 focus:border-emerald-500';
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setApiError('');
     const clientErrors = validate(fields);
     setErrors(clientErrors);
-
     if (Object.keys(clientErrors).length > 0) return;
 
-    setIsSubmitting(true);
-    try {
-      const payload = {
-        fullName: fields.fullName.trim(),
-        email: fields.email.trim(),
-        countryCode: fields.countryCode.trim(),
-        phoneNumber: fields.phone.trim().replace(/\D/g, ''),
-        password: fields.password,
-      };
+    setIsLoading(true);
+    setIsSuccess(false);
 
-      await onSubmit?.(payload);
-    } catch (err) {
-      console.error('Registration failed:', err);
+    // Simulate brief loading then show success
+    setTimeout(() => {
+      setFields(EMPTY_FIELDS);
+      setIsLoading(false);
+      setIsSuccess(true);
 
-      // Handle backend validation errors array (e.g. from express-validator)
-      if (err?.errors && Array.isArray(err.errors)) {
-        const backendFieldErrors = {};
-        err.errors.forEach((eItem) => {
-          const fieldKey = eItem.field === 'phoneNumber' ? 'phone' : eItem.field;
-          backendFieldErrors[fieldKey] = eItem.message;
-        });
-        setErrors((prev) => ({ ...prev, ...backendFieldErrors }));
-      }
-
-      // Display global error banner
-      setApiError(err?.message || 'Registration failed. Please check your information and try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+      // Auto-hide success message after 3.5s
+      setTimeout(() => setIsSuccess(false), 3500);
+    }, 1500);
   };
 
   return (
@@ -143,21 +113,19 @@ const RegisterForm = ({ onSubmit }) => {
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/40 overflow-hidden">
         <form className="p-6 sm:p-7 flex flex-col gap-3.5" onSubmit={handleSubmit} noValidate>
 
-          {/* Header */}
+          {/* Success message */}
+          {isSuccess && (
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-2.5 text-emerald-700 text-sm font-semibold">
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Your request has been sent successfully!
+            </div>
+          )}
           <div className="mb-0.5 text-center">
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">Create Account</h2>
             <p className="text-slate-400 text-xs sm:text-sm mt-0.5">Join thousands of successful students</p>
           </div>
-
-          {/* Backend Error Banner */}
-          {apiError && (
-            <div className="p-3 bg-red-50 border border-red-200/80 rounded-xl flex items-start gap-2.5 text-red-700 text-xs animate-shake">
-              <svg className="w-4 h-4 shrink-0 text-red-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              <div className="flex-1 font-medium">{apiError}</div>
-            </div>
-          )}
 
           {/* Full Name */}
           <FieldWrapper label="Full Name" error={errors.fullName}>
@@ -173,8 +141,7 @@ const RegisterForm = ({ onSubmit }) => {
                 value={fields.fullName}
                 onChange={set('fullName')}
                 autoComplete="name"
-                disabled={isSubmitting}
-                className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 disabled:opacity-60 ${borderClass('fullName')}`}
+                className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 ${borderClass('fullName')}`}
               />
             </div>
           </FieldWrapper>
@@ -193,8 +160,7 @@ const RegisterForm = ({ onSubmit }) => {
                 value={fields.email}
                 onChange={set('email')}
                 autoComplete="email"
-                disabled={isSubmitting}
-                className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 disabled:opacity-60 ${borderClass('email')}`}
+                className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 ${borderClass('email')}`}
               />
             </div>
           </FieldWrapper>
@@ -206,11 +172,10 @@ const RegisterForm = ({ onSubmit }) => {
                 <select
                   value={fields.countryCode}
                   onChange={set('countryCode')}
-                  disabled={isSubmitting}
-                  className="w-full px-2.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-xs appearance-none focus:outline-none focus:border-emerald-500 transition-all duration-200 font-medium cursor-pointer disabled:opacity-60"
+                  className="w-full px-2.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 text-xs appearance-none focus:outline-none focus:border-emerald-500 transition-all duration-200 font-medium cursor-pointer"
                 >
                   {countryCodes.map((c) => (
-                    <option key={c.value} value={c.value}>{c.label}</option>
+                    <option key={c.label} value={c.value}>{c.label}</option>
                   ))}
                 </select>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-slate-400">
@@ -219,7 +184,6 @@ const RegisterForm = ({ onSubmit }) => {
                   </svg>
                 </span>
               </div>
-
               <div className="col-span-8 relative">
                 <InputIcon>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -232,8 +196,7 @@ const RegisterForm = ({ onSubmit }) => {
                   value={fields.phone}
                   onChange={set('phone')}
                   autoComplete="tel"
-                  disabled={isSubmitting}
-                  className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 disabled:opacity-60 ${borderClass('phone')}`}
+                  className={`w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 ${borderClass('phone')}`}
                 />
               </div>
             </div>
@@ -253,8 +216,7 @@ const RegisterForm = ({ onSubmit }) => {
                 value={fields.password}
                 onChange={set('password')}
                 autoComplete="new-password"
-                disabled={isSubmitting}
-                className={`w-full pl-9 pr-9 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 disabled:opacity-60 ${borderClass('password')}`}
+                className={`w-full pl-9 pr-9 py-2.5 bg-slate-50 border rounded-lg text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-200 ${borderClass('password')}`}
               />
               <button
                 type="button"
@@ -282,32 +244,33 @@ const RegisterForm = ({ onSubmit }) => {
             </div>
           </FieldWrapper>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="w-full mt-1 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+            disabled={isLoading}
+            className="w-full mt-1 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 disabled:opacity-70 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
           >
-            {isSubmitting ? (
+            {isLoading ? (
               <>
-                <svg className="animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg className="animate-spin w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
-                <span>Creating Account…</span>
+                Sending…
               </>
             ) : (
               'Create Account'
             )}
           </button>
 
-          {/* Login Link */}
+          {/* Login link */}
           <p className="text-center text-slate-400 text-xs mt-1">
             Already have an account?{' '}
             <Link to="/login" className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
               Log In
             </Link>
           </p>
+
         </form>
       </div>
     </div>

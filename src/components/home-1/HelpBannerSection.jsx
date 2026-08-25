@@ -2,8 +2,6 @@ import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 const HelpBannerSection = () => {
-  const phone = SITE_CONFIG.phoneHome || SITE_CONFIG.phone;
-
   return (
     <section className="w-full bg-surface py-10 px-4 sm:px-10 lg:px-16 xl:px-20">
       <div className="w-full max-w-[1040px] mx-auto">
@@ -61,7 +59,7 @@ const HelpBannerSection = () => {
                   Not sure what you need?
                 </h3>
                 <p className="text-surface text-[13px] lg:text-[14px] font-normal opacity-85 max-w-[340px] leading-relaxed">
-                  Our experts are here to help you choose the right solution for your academic success.
+                  Our experts are here to help you choose the right solution for your tutoring success.
                 </p>
               </div>
             </div>
@@ -86,9 +84,10 @@ const HelpBannerSection = () => {
                 </button>
 
                 <a
-                  href={phone.href}
-                  className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[14px] font-bold px-5 py-3 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap"
-                >
+                  href={SITE_CONFIG.whatsapp.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[14px] font-bold px-5 py-3 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
                   <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>

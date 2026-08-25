@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
+
 const testimonials = [
   {
     id: 1,
-    text: 'TutorsPath did a great job on my essay writing assignment. Very well organized and professionally written and easy to understand.',
+    text: 'TutorsPath made learning so much easier. My tutor explained difficult concepts clearly and helped me feel confident before my exams.',
     rating: 5,
     name: 'Sarah M.',
-    university: 'University Student',
+    university: 'High School Student',
     avatarColor: 'bg-primary-200',
     avatarTextColor: 'text-primary-700',
   },
   {
     id: 2,
-    text: 'I ordered a research paper for my nursing course and the final document was very detailed and professionally written. My professor specifically appreciated the structure and referencing.',
+    text: 'I really appreciated the personalized approach. My tutor understood exactly where I was struggling and helped me improve step by step.',
     rating: 5,
     name: 'James R.',
     university: 'University Student',
@@ -20,14 +21,15 @@ const testimonials = [
   },
   {
     id: 3,
-    text: 'The thesis writing support was excellent from start to finish. The writer understood my topic properly and delivered a well-researched thesis paper that met all university requirements.',
+    text: "Excellent tutoring service! The sessions are engaging, professional, and focused on real understanding rather than simply memorizing answers.",
     rating: 5,
     name: 'Emily K.',
-    university: 'University Student',
+    university: 'Parent',
     avatarColor: 'bg-primary-200',
     avatarTextColor: 'text-primary-700',
   },
 ];
+
 const CARDS_PER_PAGE_DESKTOP = 3;
 const CARDS_PER_PAGE_MOBILE = 1;
 
@@ -185,7 +187,7 @@ const TestimonialCard = ({ t }) => (
       </div>
 
       {/* Subject Badge */}
-
+     
     </div>
   </div>
 );
