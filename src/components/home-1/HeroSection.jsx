@@ -57,7 +57,7 @@ const HeroSection = () => {
               <br />
               Expert{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
-               Tutoring Services
+                Tutoring Servicessss
               </span>
             </h1>
 
@@ -182,98 +182,98 @@ const HeroSection = () => {
                 {/* Form Fields — hidden after submit or while loading */}
                 <div className={submitted || loading ? 'hidden' : ''}>
 
-                {/* Name */}
-                <div className="group flex items-center gap-3">
-                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                  {/* Name */}
+                  <div className="group flex items-center gap-3">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="John Smith"
+                        required
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="John Smith"
-                      required
-                      className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                    />
-                  </div>
-                </div>
 
-                {/* Email */}
-                <div className="group flex items-center gap-3">
-                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                  {/* Email */}
+                  <div className="group flex items-center gap-3">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Email Address</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="you@example.com"
+                        required
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="you@example.com"
-                      required
-                      className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                    />
-                  </div>
-                </div>
 
-                {/* Phone */}
-                <div className="group flex items-center gap-3">
-                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                    </svg>
+                  {/* Phone */}
+                  <div className="group flex items-center gap-3">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Phone Number</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+1 234 567 890"
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Phone Number</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+1 234 567 890"
-                      className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                    />
-                  </div>
-                </div>
 
-                {/* Message */}
-                <div className="group flex items-start gap-3">
-                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 mt-0.5">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
+                  {/* Message */}
+                  <div className="group flex items-start gap-3">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 mt-0.5">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Message</label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Tell us what you need help with..."
+                        rows={3}
+                        required
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40 resize-none"
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Message</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell us what you need help with..."
-                      rows={3}
-                      required
-                      className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40 resize-none"
-                    />
-                  </div>
-                </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer"
-                >
-                  Send Message →
-                </button>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer"
+                  >
+                    Send Message →
+                  </button>
 
-                {/* Security info */}
+                  {/* Security info */}
                   <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
                     <div className="flex items-center gap-1 text-[11px] text-text-body">
                       <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
