@@ -12,3 +12,4 @@ export { default as ServicesSection } from './ServicesSection';
 export { default as HelpBannerSection } from './HelpBannerSection';
 export { default as SupportSection } from './SupportSection';
 export { default as FAQSection } from './FAQSection';
+export { default as AIWarningSection } from './AIWarningSection';

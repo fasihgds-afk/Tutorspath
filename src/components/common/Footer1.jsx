@@ -126,7 +126,7 @@ const Footer1 = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                   </svg>
-                  <span>Mohala Sadat, Humdanian wala, Dak Khana Khas, Uttra Janobi, Quaidabad, Khushab, Punjab, Pakistan</span>
+                  <span>Office # 2, Choudhary Plaza, 2nd Floor, Plot 6/7 N Main Block Swan Garden , Islamabad , Islamabad Rural , Islamabad Capital Territory</span>
                 </span>
               </li>
             </ul>

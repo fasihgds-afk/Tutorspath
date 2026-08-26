@@ -14,6 +14,7 @@ import {
   HelpBannerSection,
   SupportSection,
   FAQSection,
+  AIWarningSection,
 } from '../../components/home';
 
 const Home = () => {
@@ -25,13 +26,13 @@ const Home = () => {
 
       {/* 2. STATS */}
       <StatsSection />
-
+      <AIWarningSection />
       {/* 3. TOP WRITERS */}
       <TopWritersSection />
 
       {/* 4. FEATURES */}
       <FeaturesSection />
-  <GuaranteeSection />
+      <GuaranteeSection />
       {/* 5. HOW IT WORKS */}
       <HowItWorksSection />
 
@@ -40,16 +41,17 @@ const Home = () => {
 
       {/* CTA SECTIONS - SHOW ONE AFTER ANOTHER */}
       <CTABannerSection />
-    
+
       <HelpBannerSection />
 
       {/* REMAINING SECTIONS */}
-    
+
       <TrustedBySection />
       <TestimonialsSection />
-        <SupportBannerSection />
+      <SupportBannerSection />
       <SupportSection />
       <FAQSection />
+
 
     </main>
   );

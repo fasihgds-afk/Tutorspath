@@ -1,29 +1,237 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  assignmentType,
+  academicLevel,
+  subject,
+  deadline,
+} from '../../config/dropdown-fields.config';
+import { SITE_CONFIG } from '../../config/siteConfig';
 
-const HeroSection = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+// ─── Reusable custom select with chevron icon ────────────────────────────────
+const SelectField = ({ id, label, icon, value, onChange, required, children }) => (
+  <div className="group flex items-center gap-3">
+    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+      {icon}
+    </div>
+    <div className="flex-1 min-w-0">
+      <label htmlFor={id} className="text-[11px] font-bold text-text-body block mb-0.5">
+        {label} <span className="text-primary">*</span>
+      </label>
+      <div className="relative">
+        <select
+          id={id}
+          value={value}
+          onChange={onChange}
+          required={required}
+          className="w-full appearance-none bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 pr-8 cursor-pointer"
+        >
+          <option value="" disabled>Select {label}…</option>
+          {children}
+        </select>
+        <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-purple" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+  </div>
+);
+
+// ─── The inner form component ─────────────────────────────────────────────────
+const HeroOrderForm = () => {
+  const navigate = useNavigate();
+
+  const getDefaultValue = (field) => {
+    if (field.groups) {
+      for (const g of field.groups) {
+        const sel = g.options.find((o) => o.selected);
+        if (sel) return String(sel.value);
+      }
+      return '';
+    }
+    const sel = field.options?.find((o) => o.selected);
+    return sel ? String(sel.value) : '';
+  };
+
+  const [form, setForm] = useState({
+    assignmentType: getDefaultValue(assignmentType),
+    academicLevel: getDefaultValue(academicLevel),
+    subject: getDefaultValue(subject),
+    deadline: getDefaultValue(deadline),
   });
-  const [submitted, setSubmitted] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (field) => (e) =>
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+
+  const getLabel = (field, val) => {
+    if (!val) return '';
+    const num = Number(val);
+    if (field.groups) {
+      for (const g of field.groups) {
+        const opt = g.options.find((o) => o.value === num);
+        if (opt) return opt.label;
+      }
+    } else {
+      const opt = field.options?.find((o) => o.value === num);
+      if (opt) return opt.label;
+    }
+    return val;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Persist to localStorage so /register can pre-fill order details
+    const payload = {
+      assignmentTypeValue: Number(form.assignmentType),
+      assignmentTypeLabel: getLabel(assignmentType, form.assignmentType),
+      academicLevelValue: Number(form.academicLevel),
+      academicLevelLabel: getLabel(academicLevel, form.academicLevel),
+      subjectValue: Number(form.subject),
+      subjectLabel: getLabel(subject, form.subject),
+      deadlineValue: Number(form.deadline),
+      deadlineLabel: getLabel(deadline, form.deadline),
+      savedAt: Date.now(),
+    };
+    localStorage.setItem('heroOrderData', JSON.stringify(payload));
+
+    // Scroll to top then redirect
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
       setLoading(false);
-      setSubmitted(true);
-    }, 2500);
+      navigate(SITE_CONFIG.routes.register);
+    }, 600);
   };
 
+  const allFilled = form.assignmentType && form.academicLevel && form.subject && form.deadline;
+
+  return (
+    <form onSubmit={handleSubmit} className="pt-8 px-4 lg:px-5 pb-6 space-y-3">
+
+      {/* Loading overlay */}
+      {loading && (
+        <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
+          <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
+            <svg className="w-7 h-7 text-primary animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+            </svg>
+          </div>
+          <p className="text-[13px] font-semibold text-text-body opacity-70">Taking you to register…</p>
+        </div>
+      )}
+
+      {!loading && (
+        <>
+          {/* ── Assignment Type ─────────────────────────────── */}
+          <SelectField
+            id="hero_assignment_type"
+            label="Assignment Type"
+            value={form.assignmentType}
+            onChange={handleChange('assignmentType')}
+            required
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            }
+          >
+            {assignmentType.groups.map((g) => (
+              <optgroup key={g.group} label={g.group}>
+                {g.options.map((o) => (
+                  <option key={o.value} value={String(o.value)}>{o.label}</option>
+                ))}
+              </optgroup>
+            ))}
+          </SelectField>
+
+          {/* ── Academic Level ──────────────────────────────── */}
+          <SelectField
+            id="hero_academic_level"
+            label="Academic Level"
+            value={form.academicLevel}
+            onChange={handleChange('academicLevel')}
+            required
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7" />
+              </svg>
+            }
+          >
+            {academicLevel.options.map((o) => (
+              <option key={o.value} value={String(o.value)}>{o.label}</option>
+            ))}
+          </SelectField>
+
+          {/* ── Subject ─────────────────────────────────────── */}
+          <SelectField
+            id="hero_subject"
+            label="Subject"
+            value={form.subject}
+            onChange={handleChange('subject')}
+            required
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
+            }
+          >
+            {subject.groups.map((g) => (
+              <optgroup key={g.group} label={g.group}>
+                {g.options.map((o) => (
+                  <option key={o.value} value={String(o.value)}>{o.label}</option>
+                ))}
+              </optgroup>
+            ))}
+          </SelectField>
+
+          {/* ── Deadline ────────────────────────────────────── */}
+          <SelectField
+            id="hero_deadline"
+            label="Deadline"
+            value={form.deadline}
+            onChange={handleChange('deadline')}
+            required
+            icon={
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+          >
+            {deadline.options.map((o) => (
+              <option key={o.value} value={String(o.value)}>{o.label}</option>
+            ))}
+          </SelectField>
+
+          {/* ── Submit ──────────────────────────────────────── */}
+          <button
+            type="submit"
+            disabled={!allFilled}
+            className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          >
+            Get Free Quote →
+          </button>
+
+          {/* Security note */}
+          <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
+            <div className="flex items-center gap-1 text-[11px] text-text-body">
+              <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              <span>Your information is safe with us</span>
+            </div>
+          </div>
+        </>
+      )}
+    </form>
+  );
+};
+
+// ─── Main hero section ────────────────────────────────────────────────────────
+const HeroSection = () => {
   return (
     <section className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
@@ -48,7 +256,7 @@ const HeroSection = () => {
               <svg className="w-4 h-4 text-brand-purple shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
               </svg>
-              <span>TrustedDDD by 8,000+ Students Worldwide</span>
+              <span>Trusted by 8,000+ Students Worldwide</span>
             </div>
 
             {/* Main Heading */}
@@ -75,7 +283,7 @@ const HeroSection = () => {
 
               {[
                 {
-                  svg: <><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 14v7" /></>,
+                  svg: <><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 14v7" /></>,
                   title: 'Expert Writers', sub: "PhD & Master Level"
                 },
                 {
@@ -84,7 +292,7 @@ const HeroSection = () => {
                 },
                 {
                   svg: <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />,
-                  title: '100% Human-Written', sub: 'No AI,No Plagiarism -Guaranteed'
+                  title: '100% Human-Written', sub: 'No AI, No Plagiarism — Guaranteed'
                 },
                 {
                   svg: <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />,
@@ -162,143 +370,8 @@ const HeroSection = () => {
               </div>
 
               {/* Form Body */}
-              <form onSubmit={handleSubmit} className="pt-8 px-4 lg:px-5 pb-6 space-y-3">
+              <HeroOrderForm />
 
-                {/* Loading State */}
-                {loading && (
-                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
-                      <svg className="w-7 h-7 text-primary animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                      </svg>
-                    </div>
-                    <p className="text-[13px] font-semibold text-text-body opacity-70">Sending your message...</p>
-                  </div>
-                )}
-
-                {/* Thank You Message */}
-                {submitted && (
-                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
-                      <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h3 className="text-[17px] font-bold text-text-dark">Thank You!</h3>
-                    <p className="text-[13px] text-text-body opacity-70 max-w-[220px]">
-                      Your message has been received. We'll get back to you within 10 minutes.
-                    </p>
-                  </div>
-                )}
-
-                {/* Form Fields — hidden after submit or while loading */}
-                <div className={submitted || loading ? 'hidden' : ''}>
-
-                  {/* Name */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="John Smith"
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Email */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Email Address</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="you@example.com"
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Phone Number</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+1 234 567 890"
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div className="group flex items-start gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 mt-0.5">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Message</label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us what you need help with..."
-                        rows={3}
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40 resize-none"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer"
-                  >
-                    Get Free Quote →
-                  </button>
-
-                  {/* Security info */}
-                  <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
-                    <div className="flex items-center gap-1 text-[11px] text-text-body">
-                      <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-                      </svg>
-                      <span>Your information is safe with us</span>
-                    </div>
-                  </div>
-
-                </div>{/* end hidden wrapper */}
-
-              </form>
             </div>
           </div>
 
