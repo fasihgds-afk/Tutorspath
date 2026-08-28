@@ -1,8 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../../config/siteConfig';
 
 const CTABannerSection = () => {
+  const scrollToHeroForm = () => {
+    const el = document.getElementById('hero-order-form') || document.getElementById('hero-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const firstInput = el.querySelector('input');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 500);
+      }
+    }
+  };
+
   return (
     <section className="w-full bg-surface py-10 px-4 sm:px-10 lg:px-16 xl:px-20">
       <div className="w-full max-w-[1040px] mx-auto">
@@ -50,10 +59,13 @@ const CTABannerSection = () => {
               ))}
             </ul>
 
-            <Link to={SITE_CONFIG.routes.login}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(5,150,105,0.3)] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200">
+            <button
+              type="button"
+              onClick={scrollToHeroForm}
+              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(5,150,105,0.3)] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200 cursor-pointer"
+            >
               Book Your Demo <span className="text-base leading-none">&rarr;</span>
-            </Link>
+            </button>
           </div>
 
         </div>

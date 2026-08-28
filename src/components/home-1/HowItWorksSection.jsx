@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../../config/siteConfig';
 
 const steps = [
   {
@@ -42,6 +40,17 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
+  const scrollToHeroForm = () => {
+    const el = document.getElementById('hero-order-form') || document.getElementById('hero-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const firstInput = el.querySelector('input');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 500);
+      }
+    }
+  };
+
   return (
     <section className="w-full bg-surface-alt py-10 px-4 sm:px-10 lg:px-16 xl:px-20" id="how-it-works">
       <div className="w-full max-w-[1040px] mx-auto flex flex-col items-center">
@@ -112,10 +121,13 @@ const HowItWorksSection = () => {
 
         {/* CTA Button */}
         <div className="mt-10 w-full flex justify-center">
-          <Link to={SITE_CONFIG.routes.login}
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:scale-[1.04] hover:shadow-[0_8px_28px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200 w-full max-w-xs lg:w-auto">
+          <button
+            type="button"
+            onClick={scrollToHeroForm}
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:scale-[1.04] hover:shadow-[0_8px_28px_rgba(5,150,105,0.4)] active:scale-[0.97] transition-all duration-200 w-full max-w-xs lg:w-auto cursor-pointer"
+          >
             Get Started Now <span className="text-base leading-none">&rarr;</span>
-          </Link>
+          </button>
         </div>
 
       </div>

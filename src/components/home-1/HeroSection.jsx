@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from '../../services/api/apiClient';
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({
@@ -9,23 +10,30 @@ const HeroSection = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+
+    try {
+      await api.post('/contact', formData);
       setSubmitted(true);
-    }, 2500);
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
+    <section id="hero-order-form" className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
 
         {/* Overlapping Image — desktop only */}
@@ -278,10 +286,21 @@ const HeroSection = () => {
                     </div>
                   </div>
 
+                  {/* Error Message */}
+                  {error && (
+                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-600 rounded-xl px-3 py-2.5 text-[12px] font-medium">
+                      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {error}
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer"
+                    disabled={loading}
+                    className="w-full mt-1 bg-gradient-to-r from-brand-start to-brand-end text-surface font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(5,150,105,0.35)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(5,150,105,0.45)] active:scale-[0.97] transition-all duration-200 flex items-center justify-center gap-2 text-[14px] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:scale-100"
                   >
                     Send Message →
                   </button>

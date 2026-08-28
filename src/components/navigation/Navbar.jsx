@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import tokenManager from '../../services/auth/tokenManager';
+import authApi from '../../features/auth/api/authApi';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => tokenManager.isAuthenticated());
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(tokenManager.isAuthenticated());
+    };
+    window.addEventListener('storage', checkAuth);
+    window.addEventListener('auth_state_changed', checkAuth);
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('auth_state_changed', checkAuth);
+    };
+  }, []);
 
   const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
   const isHome1 =
@@ -14,6 +29,12 @@ const Navbar = () => {
     (location.pathname === '/' && (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1'));
 
   const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
+
+  const handleLogout = () => {
+    authApi.logout();
+    setIsMobileMenuOpen(false);
+    navigate('/');
+  };
 
   /**
    * For hash links: if already on home, scroll directly.
@@ -93,29 +114,79 @@ const Navbar = () => {
               <span>{currentPhone.display}</span>
             </a>
 
-            {/* Hire A Writer / Tutor — hidden on Home-1 */}
-            {!isHome1 && (
-              <Link
-                to={SITE_CONFIG.routes.register}
-                className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
-              >
-                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-                <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
-              </Link>
-            )}
+            {isHome1 ? (
+              <>
+                {/* Home-1 Action: Hire A Tutor (scrolls to hero form) */}
+                <a
+                  href="/home-1#hero-order-form"
+                  onClick={(e) => handleHashLink(e, 'hero-order-form')}
+                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap cursor-pointer"
+                >
+                  <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Hire A Tutor</span>
+                </a>
+              </>
+            ) : isLoggedIn ? (
+              <>
+                {/* Home (Writing) Logged In: Visit Order Page + User Area + Logout */}
+                <Link
+                  to="/order/place-order"
+                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
+                >
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Visit Order Page</span>
+                </Link>
 
-            {/* Login */}
-            <Link
-              to={SITE_CONFIG.routes.login}
-              className="flex items-center gap-2 border border-primary rounded-full px-4 py-2 text-sm text-primary font-semibold hover:bg-primary-light transition-all whitespace-nowrap"
-            >
-              <span>Login</span>
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </Link>
+                <Link
+                  to="/student/dashboard"
+                  className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold px-3.5 py-2 rounded-full transition-all whitespace-nowrap"
+                >
+                  <svg className="w-4 h-4 text-slate-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                  <span>User Area</span>
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex items-center gap-1.5 border border-red-200 text-red-600 hover:bg-red-50 rounded-full px-3.5 py-2 text-sm font-semibold transition-all whitespace-nowrap cursor-pointer"
+                  title="Logout from account"
+                >
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                  </svg>
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Home (Writing) Logged Out: Hire A Writer + Login */}
+                <Link
+                  to={SITE_CONFIG.routes.register}
+                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
+                >
+                  <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Hire A Writer</span>
+                </Link>
+
+                <Link
+                  to={SITE_CONFIG.routes.login}
+                  className="flex items-center gap-2 border border-primary rounded-full px-4 py-2 text-sm text-primary font-semibold hover:bg-primary-light transition-all whitespace-nowrap"
+                >
+                  <span>Login</span>
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -188,29 +259,83 @@ const Navbar = () => {
                 </svg>
                 <span>{currentPhone.display}</span>
               </a>
-              {/* Hire A Writer / Tutor — hidden on Home-1 */}
-              {!isHome1 && (
-                <Link
-                  to={SITE_CONFIG.routes.register}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-full transition-all"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                  </svg>
-                  <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
-                </Link>
+
+              {isHome1 ? (
+                <>
+                  {/* Home-1 Mobile Action: Hire A Tutor (scrolls to hero form) */}
+                  <a
+                    href="/home-1#hero-order-form"
+                    onClick={(e) => handleHashLink(e, 'hero-order-form')}
+                    className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-full transition-all cursor-pointer"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Hire A Tutor</span>
+                  </a>
+                </>
+              ) : isLoggedIn ? (
+                <>
+                  {/* Home (Writing) Logged In: Visit Order Page + User Area + Logout */}
+                  <Link
+                    to="/order/place-order"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-full transition-all"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Visit Order Page</span>
+                  </Link>
+                  <Link
+                    to="/student/dashboard"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold px-5 py-2.5 rounded-full transition-all"
+                  >
+                    <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                    <span>User Area</span>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="flex items-center justify-center border border-red-200 text-red-600 rounded-full px-5 py-2.5 font-semibold hover:bg-red-50 transition-all space-x-2 cursor-pointer"
+                  >
+                    <span>Logout</span>
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Home (Writing) Logged Out: Hire A Writer + Login */}
+                  <Link
+                    to={SITE_CONFIG.routes.register}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-full transition-all"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Hire A Writer</span>
+                  </Link>
+                  <Link
+                    to={SITE_CONFIG.routes.login}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center border border-primary rounded-full px-5 py-2 text-primary font-semibold hover:bg-primary-light transition-all space-x-2"
+                  >
+                    <span>Login</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                  </Link>
+                </>
               )}
-              <Link
-                to={SITE_CONFIG.routes.login}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center border border-primary rounded-full px-5 py-2 text-primary font-semibold hover:bg-primary-light transition-all space-x-2"
-              >
-                <span>Login</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-              </Link>
             </div>
           </div>
         )}
