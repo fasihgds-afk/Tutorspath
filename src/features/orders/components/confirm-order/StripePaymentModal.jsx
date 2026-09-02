@@ -291,81 +291,87 @@ const StripePaymentModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+      className="fixed inset-0 z-50 bg-black/50 overflow-y-auto"
       onClick={(e) => {
-        // allow closing by clicking backdrop only if not in the middle of a payment
         if (e.target === e.currentTarget && screen !== 'form') onClose();
       }}
     >
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 flex flex-col gap-5">
-        {/* Header — only shown for form screen */}
-        {screen === 'form' && (
-          <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-slate-900">{titleMap[screen]}</h2>
-            <button
-              type="button"
-              onClick={onClose}
-              className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
-              aria-label="Close"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        )}
-
-        {/* Amount badge — form screen only */}
-        {screen === 'form' && finalAmount != null && (
-          <div className="bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 flex items-center justify-between">
-            <span className="text-sm text-slate-600 font-medium">Amount due</span>
-            <span className="text-lg font-black text-primary">
-              ${Number(finalAmount).toFixed(2)}{' '}
-              <span className="text-sm font-semibold text-slate-500">
-                {(currency || 'USD').toUpperCase()}
-              </span>
-            </span>
-          </div>
-        )}
-
-        {/* ── Screens ── */}
-        {screen === 'form' && (
-          <Elements
-            stripe={stripePromise}
-            options={{ clientSecret, appearance: STRIPE_APPEARANCE }}
+      {/* Inner wrapper centers modal vertically but allows scroll on short screens */}
+      <div className="flex min-h-full items-center justify-center px-4 py-8">
+      <div
+        className="bg-white rounded-xl shadow-2xl w-full max-w-md flex flex-col"
+        style={{ maxHeight: 'calc(100vh - 64px)' }}
+      >
+        {/* ── Sticky header (always visible) ── */}
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100 shrink-0">
+          <h2 className="text-base font-bold text-slate-900">{titleMap[screen]}</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+            aria-label="Close"
           >
-            <CheckoutForm
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* ── Scrollable body ── */}
+        <div className="overflow-y-auto flex-1 px-6 py-5 flex flex-col gap-4">
+          {/* Amount badge — form screen only */}
+          {screen === 'form' && finalAmount != null && (
+            <div className="bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 flex items-center justify-between shrink-0">
+              <span className="text-sm text-slate-600 font-medium">Amount due</span>
+              <span className="text-lg font-black text-primary">
+                ${Number(finalAmount).toFixed(2)}{' '}
+                <span className="text-sm font-semibold text-slate-500">
+                  {(currency || 'USD').toUpperCase()}
+                </span>
+              </span>
+            </div>
+          )}
+
+          {/* ── Screens ── */}
+          {screen === 'form' && (
+            <Elements
+              stripe={stripePromise}
+              options={{ clientSecret, appearance: STRIPE_APPEARANCE }}
+            >
+              <CheckoutForm
+                finalAmount={finalAmount}
+                currency={currency}
+                onSuccess={handleSuccess}
+                onFailed={handleFailed}
+                onCancel={onClose}
+              />
+            </Elements>
+          )}
+
+          {screen === 'success' && (
+            <PaymentSuccess
               finalAmount={finalAmount}
               currency={currency}
-              onSuccess={handleSuccess}
-              onFailed={handleFailed}
+              orderNumber={orderNumber}
+              onDone={onClose}
+            />
+          )}
+
+          {screen === 'failed' && (
+            <PaymentFailed
+              errorMsg={failedMsg}
+              onRetry={handleRetry}
               onCancel={onClose}
             />
-          </Elements>
-        )}
-
-        {screen === 'success' && (
-          <PaymentSuccess
-            finalAmount={finalAmount}
-            currency={currency}
-            orderNumber={orderNumber}
-            onDone={onClose}
-          />
-        )}
-
-        {screen === 'failed' && (
-          <PaymentFailed
-            errorMsg={failedMsg}
-            onRetry={handleRetry}
-            onCancel={onClose}
-          />
-        )}
+          )}
+        </div>
+      </div>
       </div>
     </div>
   );

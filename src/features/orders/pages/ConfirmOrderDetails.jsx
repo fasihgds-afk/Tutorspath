@@ -251,16 +251,13 @@ const ConfirmOrderDetails = () => {
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
         {/* Step Tracker */}
-        <div className="bg-white border border-slate-200 rounded-sm px-5 py-4 flex items-center justify-between gap-2 shadow-xs overflow-x-auto">
-          <span className="text-xs text-slate-500 font-medium shrink-0">Order Steps:</span>
-          <div className="flex-1">
-            <OrderStepTracker currentStep={currentStep} />
-          </div>
-          <div className="shrink-0 hidden sm:block">
-            
+        <div className="bg-white border border-slate-200 rounded-lg px-6 py-5 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Order Progress</span>
+            <a
               href={SITE_CONFIG.phone?.href || 'tel:+19145154875'}
-              className="flex items-center gap-1.5 text-xs font-semibold text-primary"
-              <a>
+              className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+            >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -271,6 +268,7 @@ const ConfirmOrderDetails = () => {
               {SITE_CONFIG.phone?.display || '+1 (877) 657-8180'}
             </a>
           </div>
+          <OrderStepTracker currentStep={currentStep} />
         </div>
 
         {/* Page Title */}
