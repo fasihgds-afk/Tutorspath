@@ -1,40 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import RegisterPerks from '../components/RegisterPerks';
 import RegisterTrustBadge from '../components/RegisterTrustBadge';
+import SessionActiveBanner from '../components/SessionActiveBanner';
 import authApi from '../api/authApi';
 import tokenManager from '../../../services/auth/tokenManager';
 
 const Register = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (tokenManager.isAuthenticated()) {
-      const hasHeroData = localStorage.getItem('heroOrderData');
-      if (hasHeroData) {
-        navigate('/order/place-order', { replace: true });
-      } else {
-        navigate('/student/dashboard', { replace: true });
-      }
-    }
-  }, [navigate]);
+  const isLoggedIn = tokenManager.isAuthenticated();
 
   const handleRegister = async (payload) => {
-    // Calls backend signup API: POST /api/v1/auth/signup
-    // authApi stores token + user in localStorage automatically
     await authApi.signup(payload);
-
-    // Redirect to place order after successful registration
     navigate('/order/place-order');
   };
 
   return (
     <section className="w-full min-h-[calc(100vh-64px)] bg-surface-alt py-8 sm:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
-      <div className="w-full max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="w-full max-w-5xl mx-auto relative z-10">
 
-          {/* ── Left Column: info + perks (Matches Hero Section font & style) ── */}
+        {/* Session banner — single instance, full width above the grid */}
+        {isLoggedIn && (
+          <div className="mb-6">
+            <SessionActiveBanner />
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+
+          {/* ── Left Column: info + perks ── */}
           <div className="lg:col-span-7 flex flex-col space-y-4 lg:space-y-5 order-2 lg:order-1 text-center lg:text-left items-center lg:items-start">
 
             {/* Trust Badge */}
@@ -46,7 +41,7 @@ const Register = () => {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-[28px] sm:text-[32px] lg:text-[36px] font-bold text-text-dark leading-tight tracking-tight">
+            <h1 className="text-[26px] sm:text-[30px] lg:text-[34px] font-bold text-text-dark leading-tight tracking-tight">
               Create Your Account &amp; Connect With{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
                 Top Tutors
@@ -54,12 +49,12 @@ const Register = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-[15px] sm:text-[16px] text-text-body font-medium opacity-70 max-w-[460px] leading-relaxed -mt-1 tracking-tight">
+            <p className="text-[14px] sm:text-[15px] text-text-body font-medium opacity-70 max-w-[420px] leading-relaxed -mt-1 tracking-tight">
               Join thousands of students who trust TutorsPath for high-quality tutoring services.
             </p>
 
-            {/* Subheading bullet points */}
-            <div className="flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-[14px] sm:text-[15px] font-bold text-text-body">
+            {/* Bullets */}
+            <div className="flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-[13px] sm:text-[14px] font-bold text-text-body">
               <span>Fast</span>
               <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
               <span>No AI Tutors</span>
@@ -67,19 +62,19 @@ const Register = () => {
               <span>One to One Sessions</span>
             </div>
 
-            {/* Perks 2x2 grid */}
+            {/* Perks */}
             <div className="w-full pt-1">
               <RegisterPerks />
             </div>
 
-            {/* Rating / Trustpilot social proof */}
+            {/* Trust badge */}
             <div className="w-full pt-1">
               <RegisterTrustBadge />
             </div>
           </div>
 
-          {/* ── Right Column: Register Form (Matches Login Form design) ──────── */}
-          <div className="lg:col-span-5 order-1 lg:order-2 w-full max-w-md mx-auto lg:max-w-none">
+          {/* ── Right Column: Register Form ── */}
+          <div className="lg:col-span-5 order-1 lg:order-2 w-full max-w-sm sm:max-w-md mx-auto lg:max-w-none">
             <RegisterForm onSubmit={handleRegister} />
           </div>
 

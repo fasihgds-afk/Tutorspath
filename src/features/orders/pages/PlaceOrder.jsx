@@ -4,7 +4,6 @@ import OrderStepTracker from '../components/OrderStepTracker';
 import OrderRequirementsForm from '../components/OrderRequirementsForm';
 import { SITE_CONFIG } from '../../../config/siteConfig';
 import AddonsCard from '../components/AddonsCard';
-import OrderFreeFeaturesCard from '../components/OrderFreeFeaturesCard';
 import orderApi from '../api/orderApi';
 import tokenManager from '../../../services/auth/tokenManager';
 import { ORDER_STEP, WORDS_PER_PAGE, PLACE_ORDER_ADDONS } from '../constants/orderOptions';
@@ -200,10 +199,8 @@ const PlaceOrder = () => {
       let order;
 
       if (activeOrder?._id) {
-        // Update order — only send the 4 fields the backend accepts
-        // PATCH /api/v1/orders/:orderId/pricing
-        const pricingPayload = buildPricingUpdatePayload();
-        order = await orderApi.updateOrderPricing(activeOrder._id, pricingPayload);
+        // PATCH /api/v1/orders/:orderId — full update, all fields editable
+        order = await orderApi.updateOrder(activeOrder._id, payload);
       } else {
         // POST /api/v1/orders
         order = await orderApi.createOrder(payload);
@@ -224,8 +221,8 @@ const PlaceOrder = () => {
     <div className="bg-[#f8fafc] font-sans text-[#111827] py-8 px-4 sm:px-6 lg:px-8 min-h-screen">
       <div className="w-full max-w-[1280px] mx-auto flex flex-col gap-5">
         {/* Step Tracker — same card as ConfirmOrderDetails */}
-        <div className="bg-white border border-slate-200 rounded-lg px-6 py-5 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white border border-slate-200 rounded-lg px-3 sm:px-6 py-4 sm:py-5 shadow-sm">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Order Progress</span>
             <a
               href={SITE_CONFIG.phone?.href || 'tel:+19145154875'}
@@ -264,7 +261,7 @@ const PlaceOrder = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left: Form */}
           <div className="lg:col-span-7 flex flex-col gap-5">
-        <OrderRequirementsForm formData={formData} setFormData={setFormData} editMode={!!orderIdParam} />
+        <OrderRequirementsForm formData={formData} setFormData={setFormData} />
             <AddonsCard selectedAddons={selectedAddons} onToggleAddon={handleToggleAddon} />
 
             <div>
@@ -279,59 +276,15 @@ const PlaceOrder = () => {
             </div>
           </div>
 
-          {/* Right: Sidebar */}
+          {/* Right: Sidebar — image only */}
           <div className="lg:col-span-5 flex flex-col gap-5">
-            {/* Live pricing preview sidebar */}
-            <div className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 flex flex-col gap-4 shadow-xs sticky top-24">
-              <div className="pb-3 border-b border-slate-200">
-                <h3 className="text-slate-900 text-base font-bold">Order Summary</h3>
-                <p className="text-xs text-slate-500 mt-0.5">Review your assignment specs</p>
-              </div>
-
-              {/* Specs snapshot */}
-              <div className="flex flex-col gap-2 text-xs text-slate-600">
-                <div className="flex justify-between">
-                  <span className="font-medium">Pages:</span>
-                  <span className="font-bold text-slate-800">{formData.pages} page{formData.pages > 1 ? 's' : ''} ({formData.wordCount})</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Deadline:</span>
-                  <span className="font-bold text-slate-800 text-right max-w-[180px] truncate">{formData.deadline}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Spacing:</span>
-                  <span className="font-bold text-slate-800">{formData.lineSpacing}</span>
-                </div>
-              </div>
-
-              {/* Selected add-ons preview */}
-              {(() => {
-                const selected = PLACE_ORDER_ADDONS.filter((a) => !!selectedAddons[a.id]);
-                return selected.length > 0 ? (
-                  <div className="flex flex-col gap-1.5 pt-2 border-t border-slate-100">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Selected Add-ons</p>
-                    {selected.map((a) => (
-                      <div key={a.id} className="flex justify-between text-xs">
-                        <span className="text-slate-600">{a.name}</span>
-                        <span className="font-bold text-slate-800">+${a.price.toFixed(2)}</span>
-                      </div>
-                    ))}
-                  </div>
-                ) : null;
-              })()}
-
-              {/* User-friendly next step note */}
-              <div className="bg-emerald-50/80 border border-emerald-200/90 rounded-lg px-3.5 py-3 text-xs text-slate-700 flex items-start gap-2.5 shadow-2xs">
-                <svg className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                </svg>
-                <div className="leading-relaxed text-slate-600">
-                  <span className="font-bold text-slate-800">Next Step:</span> You can review the complete price breakdown, customize add-ons, and confirm your order before making payment.
-                </div>
-              </div>
+            <div className="sticky top-24">
+              <img
+                src="/Oder_detai.png"
+                alt="Order details preview"
+                className="w-full rounded-xl shadow-sm border border-slate-200 object-cover"
+              />
             </div>
-
-            <OrderFreeFeaturesCard />
           </div>
         </div>
       </div>

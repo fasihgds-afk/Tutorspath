@@ -251,8 +251,8 @@ const ConfirmOrderDetails = () => {
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
         {/* Step Tracker */}
-        <div className="bg-white border border-slate-200 rounded-lg px-6 py-5 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white border border-slate-200 rounded-lg px-3 sm:px-6 py-4 sm:py-5 shadow-sm">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Order Progress</span>
             <a
               href={SITE_CONFIG.phone?.href || 'tel:+19145154875'}

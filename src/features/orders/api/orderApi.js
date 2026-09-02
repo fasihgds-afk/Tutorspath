@@ -36,12 +36,12 @@ export const orderApi = {
   },
 
   /**
-   * 2. UPDATE ORDER PRICING
-   * PATCH /api/v1/orders/:orderId/pricing
+   * 2. UPDATE ORDER (all fields)
+   * PATCH /api/v1/orders/:orderId
    */
-  updateOrderPricing: async (orderId, pricingData) => {
+  updateOrder: async (orderId, orderData) => {
     try {
-      const res = await api.patch(`/orders/${orderId}/pricing`, pricingData);
+      const res = await api.patch(`/orders/${orderId}`, orderData);
       const updated = unwrapOrder(res);
       if (updated?._id) {
         orderStorage.saveOrder(updated);
@@ -51,7 +51,7 @@ export const orderApi = {
       // Update local storage record if backend not accessible
       const existing = findLocalOrder(orderId);
       if (existing) {
-        const localUpdated = { ...existing, ...pricingData };
+        const localUpdated = { ...existing, ...orderData };
         orderStorage.saveOrder(localUpdated);
         return localUpdated;
       }
