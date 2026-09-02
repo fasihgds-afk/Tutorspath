@@ -7,6 +7,7 @@ import {
   deadline,
 } from '../../config/dropdown-fields.config';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import tokenManager from '../../services/auth/tokenManager';
 
 // ─── Reusable custom select with chevron icon ────────────────────────────────
 const SelectField = ({ id, label, icon, value, onChange, required, children }) => (
@@ -84,7 +85,7 @@ const HeroOrderForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Persist to localStorage so /register can pre-fill order details
+    // Persist to localStorage so /order/place-order or /register can pre-fill order details
     const payload = {
       assignmentTypeValue: Number(form.assignmentType),
       assignmentTypeLabel: getLabel(assignmentType, form.assignmentType),
@@ -98,12 +99,15 @@ const HeroOrderForm = () => {
     };
     localStorage.setItem('heroOrderData', JSON.stringify(payload));
 
+    const isAuthenticated = tokenManager.isAuthenticated();
+    const destination = isAuthenticated ? '/order/place-order' : SITE_CONFIG.routes.register;
+
     // Scroll to top then redirect
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
       setLoading(false);
-      navigate(SITE_CONFIG.routes.register);
-    }, 600);
+      navigate(destination);
+    }, 500);
   };
 
   const allFilled = form.assignmentType && form.academicLevel && form.subject && form.deadline;

@@ -17,6 +17,9 @@ export const tokenManager = {
       } else {
         localStorage.removeItem(TOKEN_KEY);
       }
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('auth_state_changed'));
+      }
     } catch (e) {
       console.error('Failed to set token in storage:', e);
     }
@@ -38,6 +41,9 @@ export const tokenManager = {
       } else {
         localStorage.removeItem(USER_KEY);
       }
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('auth_state_changed'));
+      }
     } catch (e) {
       console.error('Failed to set user in storage:', e);
     }
@@ -46,12 +52,18 @@ export const tokenManager = {
   setAuth: (token, user) => {
     tokenManager.setToken(token);
     tokenManager.setUser(user);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('auth_state_changed'));
+    }
   },
 
   clearAuth: () => {
     try {
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('auth_state_changed'));
+      }
     } catch (e) {
       console.error('Failed to clear auth storage:', e);
     }

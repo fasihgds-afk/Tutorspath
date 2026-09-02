@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import RegisterPerks from '../components/RegisterPerks';
 import RegisterTrustBadge from '../components/RegisterTrustBadge';
+import authApi from '../api/authApi';
+import tokenManager from '../../../services/auth/tokenManager';
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (tokenManager.isAuthenticated()) {
+      const hasHeroData = localStorage.getItem('heroOrderData');
+      if (hasHeroData) {
+        navigate('/order/place-order', { replace: true });
+      } else {
+        navigate('/student/dashboard', { replace: true });
+      }
+    }
+  }, [navigate]);
+
   const handleRegister = async (payload) => {
     // Calls backend signup API: POST /api/v1/auth/signup
-    const response = await authApi.signup(payload);
-    console.log('Registration successful:', response);
-    // No redirect — errors are surfaced by RegisterForm
+    // authApi stores token + user in localStorage automatically
+    await authApi.signup(payload);
+
+    // Redirect to place order after successful registration
+    navigate('/order/place-order');
   };
 
   return (

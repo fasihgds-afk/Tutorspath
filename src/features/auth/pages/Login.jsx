@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import authApi from '../api/authApi';
+import tokenManager from '../../../services/auth/tokenManager';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (tokenManager.isAuthenticated()) {
+      const hasHeroData = localStorage.getItem('heroOrderData');
+      if (hasHeroData) {
+        navigate('/order/place-order', { replace: true });
+      } else {
+        navigate('/student/dashboard', { replace: true });
+      }
+    }
+  }, [navigate]);
+
   const handleLogin = async (data) => {
     // Calls backend login API: POST /api/v1/auth/login
-    const response = await authApi.login(data);
-    console.log('Login successful:', response);
+    // authApi stores token + user in localStorage automatically
+    await authApi.login(data);
 
-    // No redirect after login
+    // Redirect to place order after successful login
+    navigate('/order/place-order');
   };
 
   return (

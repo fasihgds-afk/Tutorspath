@@ -26,7 +26,7 @@ export const SITE_CONFIG = {
     href: 'mailto:care@tutorspath.com',
   },
   // Change activeHome to 'home' or 'home-1' to choose which home shows on '/'
-  activeHome: 'home-1',
+  activeHome: 'home',
   routes: {
     register: '/register',   // Change once here — updates Navbar & everywhere else
     login: '/login',

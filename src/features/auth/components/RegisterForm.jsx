@@ -70,16 +70,17 @@ const validate = ({ fullName, email, phone, password }) => {
 const EMPTY_FIELDS = { fullName: '', email: '', countryCode: '+1', phone: '', password: '' };
 
 // ─── Main component ───────────────────────────────────────────────────────────
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }) => {
   const [fields, setFields]             = useState(EMPTY_FIELDS);
   const [errors, setErrors]             = useState({});
+  const [apiError, setApiError]         = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading]       = useState(false);
-  const [isSuccess, setIsSuccess]       = useState(false);
 
   const set = (key) => (e) => {
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }));
+    if (apiError) setApiError('');
   };
 
   const borderClass = (key) => {
@@ -88,24 +89,37 @@ const RegisterForm = () => {
     return 'border-slate-200 focus:border-emerald-500';
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError('');
     const clientErrors = validate(fields);
     setErrors(clientErrors);
     if (Object.keys(clientErrors).length > 0) return;
 
     setIsLoading(true);
-    setIsSuccess(false);
-
-    // Simulate brief loading then show success
-    setTimeout(() => {
-      setFields(EMPTY_FIELDS);
+    try {
+      const tag = import.meta.env.VITE_SITE_TAG || 'tutorspath';
+      await onSubmit?.({
+        fullName: fields.fullName.trim(),
+        email: fields.email.trim(),
+        countryCode: fields.countryCode,
+        phoneNumber: fields.phone.trim(),
+        password: fields.password,
+        tag,
+      });
+      // Navigation is handled by the parent page after success
+    } catch (err) {
+      if (err?.errors && Array.isArray(err.errors)) {
+        const backendFieldErrors = {};
+        err.errors.forEach((eItem) => {
+          backendFieldErrors[eItem.field] = eItem.message;
+        });
+        setErrors((prev) => ({ ...prev, ...backendFieldErrors }));
+      }
+      setApiError(err?.message || 'Something went wrong. Please try again.');
+    } finally {
       setIsLoading(false);
-      setIsSuccess(true);
-
-      // Auto-hide success message after 3.5s
-      setTimeout(() => setIsSuccess(false), 3500);
-    }, 1500);
+    }
   };
 
   return (
@@ -113,13 +127,13 @@ const RegisterForm = () => {
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/40 overflow-hidden">
         <form className="p-6 sm:p-7 flex flex-col gap-3.5" onSubmit={handleSubmit} noValidate>
 
-          {/* Success message */}
-          {isSuccess && (
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-2.5 text-emerald-700 text-sm font-semibold">
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          {/* API Error Banner */}
+          {apiError && (
+            <div className="p-3 bg-red-50 border border-red-200/80 rounded-xl flex items-start gap-2.5 text-red-700 text-xs">
+              <svg className="w-4 h-4 shrink-0 text-red-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
-              Your request has been sent successfully!
+              <div className="flex-1 font-medium">{apiError}</div>
             </div>
           )}
           <div className="mb-0.5 text-center">

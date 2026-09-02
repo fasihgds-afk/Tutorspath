@@ -7,6 +7,7 @@ import Home1 from '../features/home/Home1';
 import Register from '../features/auth/pages/Register';
 import Login from '../features/auth/pages/Login';
 import PlaceOrder from '../features/orders/pages/PlaceOrder';
+import ConfirmOrderDetails from '../features/orders/pages/ConfirmOrderDetails';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
 import Reviews from '../features/reviews/pages/Reviews';
 import { SITE_CONFIG } from '../config/siteConfig';
@@ -44,6 +45,10 @@ const AppRoutes = () => {
         <Route path="/order/PlaceOrder" element={<PlaceOrder />} />
         <Route path="/student/order/place-order" element={<PlaceOrder />} />
         <Route path="/student/order/placeorder" element={<PlaceOrder />} />
+
+        {/* Confirm Order Details */}
+        <Route path="/Order/ConfirmOrderDetails" element={<ConfirmOrderDetails />} />
+        <Route path="/order/confirm-order-details" element={<ConfirmOrderDetails />} />
       </Route>
 
       {/* Fallback route */}
