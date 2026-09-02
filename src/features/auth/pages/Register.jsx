@@ -1,31 +1,24 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import RegisterPerks from '../components/RegisterPerks';
 import RegisterTrustBadge from '../components/RegisterTrustBadge';
 import SessionActiveBanner from '../components/SessionActiveBanner';
 import authApi from '../api/authApi';
 import tokenManager from '../../../services/auth/tokenManager';
+import useSmartRedirect from '../hooks/useSmartRedirect';
 
 const Register = () => {
-  const navigate = useNavigate();
+  const smartRedirect = useSmartRedirect();
   const isLoggedIn = tokenManager.isAuthenticated();
 
   const handleRegister = async (payload) => {
     await authApi.signup(payload);
-    navigate('/order/place-order');
+    await smartRedirect();
   };
 
   return (
     <section className="w-full min-h-[calc(100vh-64px)] bg-surface-alt py-8 sm:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden">
       <div className="w-full max-w-5xl mx-auto relative z-10">
-
-        {/* Session banner — single instance, full width above the grid */}
-        {isLoggedIn && (
-          <div className="mb-6">
-            <SessionActiveBanner />
-          </div>
-        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
 
@@ -73,9 +66,13 @@ const Register = () => {
             </div>
           </div>
 
-          {/* ── Right Column: Register Form ── */}
+          {/* ── Right Column: Register Form or Active Session Card ── */}
           <div className="lg:col-span-5 order-1 lg:order-2 w-full max-w-sm sm:max-w-md mx-auto lg:max-w-none">
-            <RegisterForm onSubmit={handleRegister} />
+            {isLoggedIn ? (
+              <SessionActiveBanner />
+            ) : (
+              <RegisterForm onSubmit={handleRegister} />
+            )}
           </div>
 
         </div>

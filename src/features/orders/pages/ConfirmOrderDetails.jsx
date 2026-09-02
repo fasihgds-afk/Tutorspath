@@ -27,11 +27,9 @@ const ConfirmOrderDetails = () => {
   // ── Add-ons ────────────────────────────────────────────────────────────
   const [selectedAddons, setSelectedAddons] = useState({});
 
-  // ── Confirm / Pay ──────────────────────────────────────────────────────
-  const [isConfirming, setIsConfirming] = useState(false);
+  // ── Pay ────────────────────────────────────────────────────────────────
   const [isPaying, setIsPaying] = useState(false);
   const [actionError, setActionError] = useState('');
-  const [confirmedThisSession, setConfirmedThisSession] = useState(false);
 
   // ── Stripe payment modal ────────────────────────────────────────────────
   const [stripeModal, setStripeModal] = useState({
@@ -66,13 +64,6 @@ const ConfirmOrderDetails = () => {
     fetchOrder();
   }, [fetchOrder]);
 
-  // If order is already awaitingPayment when page loads, jump straight to Deposit Funds
-  useEffect(() => {
-    if (order?.status === 'awaitingPayment') {
-      setConfirmedThisSession(true);
-    }
-  }, [order?.status]);
-
   // Sync selected add-ons whenever order changes (from backend order.addOns)
   useEffect(() => {
     if (order?.addOns && Array.isArray(order.addOns)) {
@@ -93,49 +84,27 @@ const ConfirmOrderDetails = () => {
     }
   }, [order?.addOns]);
 
-  // ── Toggle Add-on & update pricing if in draft ──────────────────────────
+  // ── Toggle Add-on & update pricing ────────────────────────────────────
   const toggleAddon = async (id) => {
     const nextSelected = { ...selectedAddons, [id]: !selectedAddons[id] };
     setSelectedAddons(nextSelected);
 
-    if (orderId && isDraft) {
+    if (orderId && !isPaid) {
       const addOns = CONFIRM_ORDER_ADDONS
         .filter((addon) => !!nextSelected[addon.id])
         .map((addon) => addon.name);
 
       try {
-        const updated = await orderApi.updateOrderPricing(orderId, {
+        const updated = await orderApi.updateOrder(orderId, {
           deadline: order.deadline,
           numberOfPages: order.numberOfPages,
           lineSpacing: order.lineSpacing,
           addOns,
         });
-        if (updated) {
-          setOrder(updated);
-        }
+        if (updated) setOrder(updated);
       } catch (err) {
-        console.error('Failed to update add-ons pricing:', err);
+        console.error('Failed to update add-ons:', err);
       }
-    }
-  };
-
-  // ── Confirm → POST /api/v1/orders/:orderId/confirm ─────────────────────
-  const handleConfirmOrder = async () => {
-    if (!orderId || isConfirming) return;
-    setActionError('');
-    if (order?.status === 'awaitingPayment') {
-      setConfirmedThisSession(true);
-      return;
-    }
-    setIsConfirming(true);
-    try {
-      const confirmed = await orderApi.confirmOrder(orderId);
-      setOrder(confirmed);
-      setConfirmedThisSession(true);
-    } catch (err) {
-      setActionError(err?.message || 'Failed to confirm order. Please try again.');
-    } finally {
-      setIsConfirming(false);
     }
   };
 
@@ -199,11 +168,9 @@ const ConfirmOrderDetails = () => {
   };
 
   // ── Derived ──────────────────────────────────────────────────────────────
-  const currentStep = order ? statusToStep(order.status) : statusToStep('draft');
+  const currentStep = order ? statusToStep(order.status) : statusToStep('awaitingPayment');
   const isPaid = isOrderPaid(order);
-  const isDraft = order?.status === 'draft';
-  const canConfirm = isDraft || (order?.status === 'awaitingPayment' && !confirmedThisSession);
-  const canPay = confirmedThisSession && order?.status === 'awaitingPayment' && !isPaid;
+  const canPay = !isPaid;
 
   const displayId = order?.orderNumber || `TP-${String(order?._id || '').slice(-8).toUpperCase()}`;
   const spacingLabel =
@@ -317,7 +284,6 @@ const ConfirmOrderDetails = () => {
                 orderId={orderId}
                 displayId={displayId}
                 spacingLabel={spacingLabel}
-                isDraft={isDraft}
                 selectedAddons={selectedAddons}
                 onToggleAddon={toggleAddon}
               />
@@ -332,9 +298,6 @@ const ConfirmOrderDetails = () => {
                 discountAmount={order?.pricing?.discountAmount}
                 discountPercentage={order?.pricing?.discountPercentage}
                 discountReason={order?.pricing?.discountReason}
-                canConfirm={canConfirm}
-                isConfirming={isConfirming}
-                onConfirm={handleConfirmOrder}
                 canPay={canPay}
                 isPaying={isPaying}
                 onDepositFunds={handleDepositFunds}

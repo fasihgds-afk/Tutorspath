@@ -8,7 +8,6 @@ const OrderDetailsPanel = ({
   orderId,
   displayId,
   spacingLabel,
-  isDraft,
   selectedAddons,
   onToggleAddon,
 }) => {
@@ -33,28 +32,18 @@ const OrderDetailsPanel = ({
 
   return (
     <div className="bg-white border border-slate-200 rounded-sm overflow-hidden shadow-xs">
-      {/* Card Header with edit actions */}
+      {/* Card Header — always show edit button */}
       <div className="bg-primary text-white px-5 py-3 flex items-center justify-between gap-2">
         <span className="font-bold text-sm">Order Details</span>
-
-        {isDraft && (
-          <div className="flex items-center gap-2">
-            {/* Edit Order Details → goes back to PlaceOrder (full field editing) */}
-            <Link
-              to={`/order/place-order?orderId=${orderId}`}
-              className="flex items-center gap-1.5 text-xs font-semibold bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded transition-colors"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487z"
-                />
-              </svg>
-              Edit Order Details
-            </Link>
-          </div>
-        )}
+        <Link
+          to={`/order/place-order?orderId=${orderId}`}
+          className="flex items-center gap-1.5 text-xs font-semibold bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487z" />
+          </svg>
+          Edit Order Details
+        </Link>
       </div>
 
       <DetailList items={detailRows} variant="divided" />
@@ -83,17 +72,14 @@ const OrderDetailsPanel = ({
         {CONFIRM_ORDER_ADDONS.map((addon) => (
           <label
             key={addon.id}
-            className={`flex items-center justify-between py-2.5 px-5 transition-colors ${
-              isDraft ? 'cursor-pointer hover:bg-slate-50' : 'cursor-default'
-            }`}
+            className="flex items-center justify-between py-2.5 px-5 transition-colors cursor-pointer hover:bg-slate-50"
           >
             <div className="flex items-center gap-2.5">
               <input
                 type="checkbox"
                 checked={!!selectedAddons[addon.id]}
-                disabled={!isDraft}
-                onChange={() => isDraft && onToggleAddon(addon.id)}
-                className="accent-primary w-4 h-4 cursor-pointer disabled:cursor-default"
+                onChange={() => onToggleAddon(addon.id)}
+                className="accent-primary w-4 h-4 cursor-pointer"
               />
               <span className="text-sm text-slate-700 font-medium">{addon.label}</span>
             </div>

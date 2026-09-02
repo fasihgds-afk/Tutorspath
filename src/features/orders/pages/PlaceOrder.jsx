@@ -112,10 +112,7 @@ const PlaceOrder = () => {
         setSelectedAddons(initialSelected);
       }
 
-      // If already past draft, go straight back to ConfirmOrderDetails
-      if (order.status && order.status !== 'draft') {
-        navigate(`/Order/ConfirmOrderDetails?orderId=${order._id}`, { replace: true });
-      }
+      // Load add-ons from the order
     });
   }, [orderIdParam, navigate]);
 
@@ -202,8 +199,13 @@ const PlaceOrder = () => {
         // PATCH /api/v1/orders/:orderId — full update, all fields editable
         order = await orderApi.updateOrder(activeOrder._id, payload);
       } else {
-        // POST /api/v1/orders
+        // POST /api/v1/orders then immediately confirm
         order = await orderApi.createOrder(payload);
+        if (order?._id) {
+          // POST /api/v1/orders/:orderId/confirm
+          const confirmed = await orderApi.confirmOrder(order._id);
+          if (confirmed?._id) order = confirmed;
+        }
       }
 
       localStorage.removeItem(HERO_ORDER_STORAGE_KEY);

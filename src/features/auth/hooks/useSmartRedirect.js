@@ -1,18 +1,16 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import orderApi from '../../orders/api/orderApi';
+import { isOrderPaid } from '../../orders/utils/orderHelpers';
 
 /**
- * Smart redirect hook.
- * Checks the user's order history and navigates to the most relevant page:
+ * Smart redirect hook after Login / Register or when clicking View/Create Order.
+ * Checks the user's order history and navigates dynamically:
  *
- *  1. No orders at all            → /order/place-order
- *  2. Has draft / awaitingPayment → /Order/ConfirmOrderDetails?orderId=...
- *  3. Has paid / completed order  → /student/dashboard
+ *  1. Zero orders (user didn't order) → /order/place-order
+ *  2. Confirmed order but didn't pay (pending / unpaid) → /Order/ConfirmOrderDetails?orderId=...
+ *  3. Completed payment (paid orders) → /student/dashboard
  */
-const PAID_STATUSES = ['paid', 'writerAssigned', 'inProgress', 'submitted', 'revisionRequested', 'completed'];
-const PENDING_STATUSES = ['draft', 'awaitingPayment'];
-
 const useSmartRedirect = () => {
   const navigate = useNavigate();
 
@@ -20,8 +18,8 @@ const useSmartRedirect = () => {
     try {
       const orders = await orderApi.getStudentOrders();
 
+      // 1. Zero orders → show place order page
       if (!Array.isArray(orders) || orders.length === 0) {
-        // No orders — send them to create one
         navigate('/order/place-order');
         return;
       }
@@ -31,24 +29,25 @@ const useSmartRedirect = () => {
         (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
       );
 
-      // Check if any order is paid/active
-      const paidOrder = sorted.find((o) => PAID_STATUSES.includes(o.status));
+      // 2. If user has an order they confirmed/created but didn't pay yet → go to confirm order / deposit funds
+      const pendingUnpaidOrder = sorted.find((o) => !isOrderPaid(o));
+      if (pendingUnpaidOrder && pendingUnpaidOrder._id) {
+        navigate(`/Order/ConfirmOrderDetails?orderId=${pendingUnpaidOrder._id}`);
+        return;
+      }
+
+      // 3. If user has completed payment → go to student dashboard
+      const paidOrder = sorted.find((o) => isOrderPaid(o));
       if (paidOrder) {
         navigate('/student/dashboard');
         return;
       }
 
-      // Check if any order is pending (draft / awaiting payment)
-      const pendingOrder = sorted.find((o) => PENDING_STATUSES.includes(o.status));
-      if (pendingOrder) {
-        navigate(`/Order/ConfirmOrderDetails?orderId=${pendingOrder._id}`);
-        return;
-      }
-
-      // Fallback — just go to dashboard
+      // Fallback
       navigate('/student/dashboard');
-    } catch {
-      // API failed — safe fallback
+    } catch (err) {
+      console.error('Smart redirect error:', err);
+      // Safe fallback if API fails
       navigate('/order/place-order');
     }
   }, [navigate]);
