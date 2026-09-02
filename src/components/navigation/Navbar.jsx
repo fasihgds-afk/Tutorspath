@@ -119,30 +119,9 @@ const Navbar = () => {
               <span>{currentPhone.display}</span>
             </a>
 
-            {isHome1 ? (
+            {!isHome1 && (
               <>
-                {/* Home-1 Action: Hire A Tutor (scrolls to hero form) */}
-                <a
-                  href="/home-1#hero-order-form"
-                  onClick={(e) => handleHashLink(e, 'hero-order-form')}
-                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap cursor-pointer"
-                >
-                  <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                  </svg>
-                  <span>Hire A Tutor</span>
-                </a>
-
-                <Link
-                  to={SITE_CONFIG.routes.login}
-                  className="flex items-center gap-1.5 border border-primary rounded-full px-4 py-2 text-sm text-primary font-semibold hover:bg-primary-light transition-all whitespace-nowrap"
-                >
-                  <span>Login</span>
-                </Link>
-              </>
-            ) : (
-              <>
-                {/* Home (Writing): always show Hire A Writer + Login */}
+                {/* Home (Writing) only: show Hire A Writer + Login */}
                 <Link
                   to={SITE_CONFIG.routes.register}
                   className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
