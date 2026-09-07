@@ -119,7 +119,21 @@ const Navbar = () => {
               <span>{currentPhone.display}</span>
             </a>
 
-            {!isHome1 && (
+            {isHome1 ? (
+              <>
+                {/* Home-1 (Tutoring): show only Hire A Tutor scroll button */}
+                <a
+                  href="/#hero-order-form"
+                  onClick={(e) => handleHashLink(e, 'hero-order-form')}
+                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap cursor-pointer"
+                >
+                  <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Hire A Tutor</span>
+                </a>
+              </>
+            ) : (
               <>
                 {/* Home (Writing) only: show Hire A Writer + Login */}
                 <Link
