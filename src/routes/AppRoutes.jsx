@@ -11,10 +11,18 @@ import ConfirmOrderDetails from '../features/orders/pages/ConfirmOrderDetails';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
 import Reviews from '../features/reviews/pages/Reviews';
 import { SITE_CONFIG } from '../config/siteConfig';
+import { SEO_ROUTES_CONFIG, getRouteVariant } from '../config/homeConfig';
 
 const AppRoutes = () => {
   const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
   const ActiveHome = (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1') ? Home1 : Home;
+
+  const seoRoutes = Object.keys(SEO_ROUTES_CONFIG.routes || {}).map((rawPath) => {
+    const path = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+    const variant = getRouteVariant(path, SITE_CONFIG.activeHome);
+    const Component = variant === 'home1' ? Home1 : Home;
+    return { path, Component };
+  });
 
   return (
     <Routes>
@@ -28,6 +36,11 @@ const AppRoutes = () => {
         <Route path="/account/register" element={<Register />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        {/* Dynamic SEO Landing Routes */}
+        {seoRoutes.map(({ path, Component }) => (
+          <Route key={path} path={path} element={<Component />} />
+        ))}
       </Route>
 
       {/* Student Routes with Student Navbar & 2-line Footer */}

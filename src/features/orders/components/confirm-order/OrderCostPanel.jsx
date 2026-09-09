@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../../../config/siteConfig';
+import { useHomeContext } from '../../../../hooks/useHomeContext';
 
 const OrderCostPanel = ({
   basePrice,
@@ -15,7 +15,8 @@ const OrderCostPanel = ({
   isPaid,
   orderStatus,
 }) => {
-  const phone = SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone;
+  const { phone: contextPhone } = useHomeContext();
+  const phone = contextPhone || SITE_CONFIG.phone;
 
   return (
     <>
@@ -25,18 +26,36 @@ const OrderCostPanel = ({
           <span className="font-bold text-sm uppercase tracking-wide">Order Cost</span>
         </div>
         <div className="flex flex-col divide-y divide-slate-100 px-5">
-          {basePrice != null && (
+          {/* Standard Price (x2) */}
+          {finalAmount != null && (
             <div className="flex items-center justify-between py-2.5 text-sm">
-              <span className="text-slate-600">Calculated Price</span>
-              <span className="font-bold text-slate-900">${basePrice.toFixed(2)}</span>
+              <span className="text-slate-600">Original Price</span>
+              <span className="text-slate-400 line-through font-semibold">
+                ${(finalAmount * 2).toFixed(2)}
+              </span>
             </div>
           )}
 
-          {/* Show backend discount if admin applied one */}
+          {/* 50% Discount */}
+          {finalAmount != null && (
+            <div className="flex items-center justify-between py-2.5 text-sm bg-emerald-50/70 -mx-5 px-5">
+              <span className="text-emerald-800 font-semibold flex items-center gap-1.5">
+                <span>Limited Time Discount</span>
+                <span className="bg-emerald-200/90 text-emerald-900 text-[10px] font-black px-1.5 py-0.5 rounded">
+                  50%
+                </span>
+              </span>
+              <span className="font-bold text-emerald-600">
+                −${finalAmount.toFixed(2)}
+              </span>
+            </div>
+          )}
+
+          {/* Backend additional discount if present */}
           {discountAmount > 0 && (
             <div className="flex items-center justify-between py-2.5 text-sm">
               <span className="text-slate-600">
-                Discount
+                Additional Discount
                 {discountPercentage > 0 && ` (${discountPercentage}%)`}
                 {discountReason && <span className="text-slate-400 font-normal"> — {discountReason}</span>}
               </span>
@@ -44,18 +63,21 @@ const OrderCostPanel = ({
             </div>
           )}
 
-          {addonsCost > 0 && (
-            <div className="flex items-center justify-between py-2.5 text-sm">
-              <span className="text-slate-600">Add-ons</span>
-              <span className="font-bold text-slate-900">${addonsCost.toFixed(2)}</span>
-            </div>
-          )}
-
           <div className="flex items-center justify-between py-3">
-            <span className="font-black text-slate-900 text-base uppercase">Total</span>
-            <span className="font-black text-primary text-xl">
-              {finalAmount != null ? `$${finalAmount.toFixed(2)}` : 'Calculating…'}
-            </span>
+            <div>
+              <span className="font-black text-slate-900 text-base uppercase block">Final Amount</span>
+              <span className="text-[11px] text-emerald-600 font-semibold">You save 50%</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              {finalAmount != null && (
+                <span className="text-sm text-slate-400 line-through font-medium">
+                  ${(finalAmount * 2).toFixed(2)}
+                </span>
+              )}
+              <span className="font-black text-primary text-xl">
+                {finalAmount != null ? `$${finalAmount.toFixed(2)}` : 'Calculating…'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -63,17 +85,6 @@ const OrderCostPanel = ({
       {/* Deposit Funds — always shown when not paid */}
       {canPay && (
         <div className="flex flex-col gap-3">
-          <p className="text-xs text-slate-500 text-center leading-relaxed">
-            By placing order, you confirm that you have read and agreed to our{' '}
-            <Link to="/privacy-policy" className="text-primary hover:underline font-semibold">
-              Privacy Policy
-            </Link>{' '}
-            and{' '}
-            <Link to="/terms" className="text-primary hover:underline font-semibold">
-              Terms &amp; Conditions
-            </Link>
-            .
-          </p>
           <button
             type="button"
             disabled={isPaying}
@@ -108,7 +119,7 @@ const OrderCostPanel = ({
         </div>
         <p className="text-xs text-slate-600 leading-relaxed pl-9">
           Your payment stays secure and is only released when you're 100% satisfied. Unlimited free
-          revisions — no extra cost, no stress.
+          revisions no extra cost, no stress.
         </p>
       </div>
 

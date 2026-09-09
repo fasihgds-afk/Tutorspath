@@ -4,14 +4,11 @@ import Navbar from '../components/navigation/Navbar';
 import Footer from '../components/common/Footer';
 import Footer1 from '../components/common/Footer1';
 import { SITE_CONFIG } from '../config/siteConfig';
+import { checkIsHome1Path } from '../config/homeConfig';
 
 const PublicLayout = () => {
   const location = useLocation();
-  const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
-  const isHome1 =
-    location.pathname.startsWith('/home-1') ||
-    location.pathname.startsWith('/home1') ||
-    (location.pathname === '/' && (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1'));
+  const isHome1 = checkIsHome1Path(location.pathname, SITE_CONFIG.activeHome);
 
   return (
     <div className="min-h-screen flex flex-col justify-between">

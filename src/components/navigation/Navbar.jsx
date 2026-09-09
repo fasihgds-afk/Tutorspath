@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { checkIsHome1Path, checkIsLandingPath } from '../../config/homeConfig';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
-  const isHome1 =
-    location.pathname.startsWith('/home-1') ||
-    location.pathname.startsWith('/home1') ||
-    (location.pathname === '/' && (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1'));
-
+  const isHome1 = checkIsHome1Path(location.pathname, SITE_CONFIG.activeHome);
   const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
 
   // Close mobile menu on route change
@@ -42,13 +38,13 @@ const Navbar = () => {
   }, []);
 
   /**
-   * For hash links: if already on home, scroll directly.
-   * If on another page, navigate to /#hash and ScrollToHash handles the rest.
+   * For hash links: if already on home or landing page, scroll directly.
+   * If on another page, navigate to target home and ScrollToHash handles the rest.
    */
   const handleHashLink = (e, hash) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    if (location.pathname === '/' || location.pathname === '/home' || location.pathname === '/home-1' || location.pathname === '/home1') {
+    if (checkIsLandingPath(location.pathname)) {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {

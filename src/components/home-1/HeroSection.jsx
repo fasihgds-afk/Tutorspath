@@ -118,8 +118,19 @@ const HeroSection = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
                   <span className="text-[17px] font-extrabold text-text-dark">4.8/5</span>
-                  <div className="flex text-amber-400 text-[13px] gap-0.5">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  <div className="flex items-center gap-0.5">
+                    <span className="text-[13px] leading-none text-amber-400">★</span>
+                    <span className="text-[13px] leading-none text-amber-400">★</span>
+                    <span className="text-[13px] leading-none text-amber-400">★</span>
+                    <span className="text-[13px] leading-none text-amber-400">★</span>
+                    {/* Partial star — 80% filled */}
+                    <span className="relative inline-block text-[13px] leading-none">
+                      <span className="text-gray-300">★</span>
+                      <span
+                        className="absolute inset-0 overflow-hidden text-amber-400"
+                        style={{ width: '80%' }}
+                      >★</span>
+                    </span>
                   </div>
                 </div>
                 <span className="text-[10px] text-text-body font-medium opacity-65">Based on 2,000+ Reviews</span>
@@ -159,14 +170,23 @@ const HeroSection = () => {
 
               {/* Banner Header */}
               <div className="absolute -top-5 left-4 right-4 z-30 bg-gradient-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">
-                Get in Touch — We Reply in 10 Minutes
+                Get in Touch — We are Available 24/7
               </div>
 
               {/* Discount Badge */}
-              <div className="absolute -top-8 -right-2 z-40 bg-primary text-surface w-[48px] h-[48px] lg:w-[52px] lg:h-[52px] rounded-full flex flex-col items-center justify-center font-extrabold text-[9px] leading-tight shadow-md rotate-12 hover:rotate-0 hover:scale-110 transition-all duration-300">
-                <span>UP TO</span>
-                <span className="text-[11px]">30%</span>
-                <span>OFF</span>
+              <div className="absolute -top-7 -right-2.5 z-40 group cursor-pointer">
+                {/* Glowing pulse ring */}
+                <span className="absolute inset-0 rounded-full bg-emerald-400 opacity-40 animate-ping pointer-events-none" />
+
+                {/* Badge Circle */}
+                <div className="relative w-[52px] h-[52px] lg:w-[56px] lg:h-[56px] rounded-full bg-gradient-to-br from-emerald-500 via-teal-600 to-emerald-800 text-white flex flex-col items-center justify-center shadow-[0_8px_20px_rgba(5,150,105,0.45)] border-2 border-white rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all duration-300 select-none">
+                  <span className="text-[15px] lg:text-[16px] font-black tracking-tight leading-none drop-shadow-xs">
+                    50%
+                  </span>
+                  <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-wider text-emerald-100 leading-tight">
+                    OFF
+                  </span>
+                </div>
               </div>
 
               {/* Form Body */}
