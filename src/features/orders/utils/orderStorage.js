@@ -1,9 +1,22 @@
-const ORDERS_STORAGE_KEY = 'student_placed_orders';
+import tokenManager from '../../../services/auth/tokenManager';
+
+const BASE_KEY = 'student_placed_orders';
+
+const getStorageKey = () => {
+  try {
+    const user = tokenManager.getUser();
+    const userId = user?.id || user?._id;
+    return userId ? `${BASE_KEY}_${userId}` : `${BASE_KEY}_guest`;
+  } catch {
+    return `${BASE_KEY}_guest`;
+  }
+};
 
 export const orderStorage = {
   getOrders: () => {
     try {
-      const stored = localStorage.getItem(ORDERS_STORAGE_KEY);
+      const key = getStorageKey();
+      const stored = localStorage.getItem(key);
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -13,6 +26,7 @@ export const orderStorage = {
   saveOrder: (order) => {
     if (!order || !order._id) return;
     try {
+      const key = getStorageKey();
       const current = orderStorage.getOrders();
       const existingIdx = current.findIndex((o) => o._id === order._id);
       let updated;
@@ -22,7 +36,7 @@ export const orderStorage = {
       } else {
         updated = [order, ...current];
       }
-      localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(updated));
+      localStorage.setItem(key, JSON.stringify(updated));
     } catch (e) {
       console.error('Failed to save order in local storage:', e);
     }
@@ -30,6 +44,7 @@ export const orderStorage = {
 
   updateOrderPayment: (orderId, paymentStatus = 'paid') => {
     try {
+      const key = getStorageKey();
       const current = orderStorage.getOrders();
       const updated = current.map((o) => {
         if (o._id === orderId) {
@@ -43,10 +58,21 @@ export const orderStorage = {
         }
         return o;
       });
-      localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(updated));
+      localStorage.setItem(key, JSON.stringify(updated));
       return updated.find((o) => o._id === orderId);
     } catch (e) {
       console.error('Failed to update order payment in local storage:', e);
+    }
+  },
+
+  clearOrders: () => {
+    try {
+      const key = getStorageKey();
+      localStorage.removeItem(key);
+      localStorage.removeItem(BASE_KEY);
+      localStorage.removeItem(`${BASE_KEY}_guest`);
+    } catch (e) {
+      console.error('Failed to clear order storage:', e);
     }
   },
 };

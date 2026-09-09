@@ -59,10 +59,21 @@ export const tokenManager = {
 
   clearAuth: () => {
     try {
+      const user = tokenManager.getUser();
+      const userId = user?.id || user?._id;
+      if (userId) {
+        localStorage.removeItem(`student_placed_orders_${userId}`);
+      }
+      localStorage.removeItem('student_placed_orders');
+      localStorage.removeItem('student_placed_orders_guest');
+      localStorage.removeItem('heroOrderData');
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.clear();
+      }
       if (typeof window !== 'undefined') {
-        window.dispatchEvent(new Event('auth_state_changed'));
+        window.dispatchEvent(new CustomEvent('auth_state_changed'));
       }
     } catch (e) {
       console.error('Failed to clear auth storage:', e);

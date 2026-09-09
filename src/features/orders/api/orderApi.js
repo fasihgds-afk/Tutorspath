@@ -169,8 +169,11 @@ export const orderApi = {
       }
       // Backend returned empty array — still valid, no fallback needed
       return orders;
-    } catch {
-      // Network error — fall back to localStorage cache
+    } catch (err) {
+      // Network error — fall back to user-scoped cache only if authenticated
+      if (!tokenManager.isAuthenticated()) {
+        return [];
+      }
       return orderStorage.getOrders();
     }
   },

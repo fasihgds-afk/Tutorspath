@@ -41,6 +41,44 @@ export const request = async (endpoint, options = {}) => {
     }
 
     if (!response.ok) {
+      const isAuthEndpoint =
+        endpoint.includes('/auth/login') ||
+        endpoint.includes('/auth/signup') ||
+        endpoint.includes('/auth/check-email');
+
+      if (response.status === 401 && !isAuthEndpoint) {
+        tokenManager.clearAuth();
+
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('auth_state_changed'));
+
+          const publicRoutes = [
+            '/',
+            '/login',
+            '/register',
+            '/account/login',
+            '/account/register',
+            '/forgot-password',
+            '/reviews',
+            '/home',
+            '/home-1',
+            '/home1',
+          ];
+
+          const currentPath = window.location.pathname.toLowerCase();
+          const isPublicRoute = publicRoutes.some(
+            (route) => currentPath === route || currentPath.startsWith('/home')
+          );
+
+          if (!isPublicRoute) {
+            window.location.replace('/login');
+          }
+        }
+
+        const message = data?.message || 'Session expired. Please login again.';
+        throw new ApiError(message, 401, data?.errors || null, data);
+      }
+
       const message =
         data?.message ||
         (data?.errors && data.errors.length > 0 ? data.errors[0].message : 'An error occurred. Please try again.');
