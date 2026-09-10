@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import OrderStepTracker from '../components/OrderStepTracker';
 import OrderRequirementsForm from '../components/OrderRequirementsForm';
@@ -7,7 +7,7 @@ import AddonsCard from '../components/AddonsCard';
 import orderApi from '../api/orderApi';
 import tokenManager from '../../../services/auth/tokenManager';
 import { ORDER_STEP, WORDS_PER_PAGE, PLACE_ORDER_ADDONS } from '../constants/orderOptions';
-import { formatWordCount, parseDeadlineKey } from '../utils/orderHelpers';
+import { formatWordCount, parseDeadlineKey, calculateWordCount } from '../utils/orderHelpers';
 import { SITE_TAG } from '../../../config/env';
 import { deadline as deadlineOptions } from '../../../config/dropdown-fields.config';
 
@@ -87,7 +87,7 @@ const PlaceOrder = () => {
         projectTitle: order.title || prev.projectTitle,
         deadline: deadlineDisplayLabel,
         pages: order.numberOfPages || prev.pages,
-        wordCount: formatWordCount(order.numberOfPages || 1),
+        wordCount: formatWordCount(order.numberOfPages || 1, lineSpacingDisplayLabel),
         lineSpacing: lineSpacingDisplayLabel,
         guidelines: order.guidelines || prev.guidelines,
         citationStyle: order.citationStyle || prev.citationStyle,
@@ -141,7 +141,7 @@ const PlaceOrder = () => {
       title,
       deadline,
       numberOfPages: pages,
-      wordCount: pages * WORDS_PER_PAGE,
+      wordCount: calculateWordCount(pages, lineSpacing),
       lineSpacing,
       guidelines: formData.guidelines || '',
       citationStyle: formData.citationStyle || 'Non Specific',

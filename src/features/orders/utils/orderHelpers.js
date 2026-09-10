@@ -4,7 +4,22 @@ import { WORDS_PER_PAGE, ORDER_STEP, PAID_STATUSES } from '../constants/orderOpt
  * Formats a page count into the "N Words" label shown next to the page
  * stepper and used as the disabled Word Count field value.
  */
-export const formatWordCount = (pages) => `${(parseInt(pages, 10) || 1) * WORDS_PER_PAGE} Words`;
+export const formatWordCount = (pages, lineSpacing = 'double') => {
+  const baseWords = (parseInt(pages, 10) || 1) * WORDS_PER_PAGE;
+  // Apply line spacing multiplier: double for single line spacing (2x), normal for double (1x)
+  const multiplier = lineSpacing?.toLowerCase().includes('single') ? 2 : 1;
+  return `${baseWords * multiplier} Words`;
+};
+
+/**
+ * Calculates word count based on pages and line spacing.
+ * Returns the actual numeric word count (not formatted string).
+ */
+export const calculateWordCount = (pages, lineSpacing = 'double') => {
+  const baseWords = (parseInt(pages, 10) || 1) * WORDS_PER_PAGE;
+  const multiplier = lineSpacing?.toLowerCase().includes('single') ? 2 : 1;
+  return baseWords * multiplier;
+};
 
 /**
  * Strips the date portion from a deadline label and normalizes it to the

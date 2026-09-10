@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   assignmentType,
   academicLevel,
@@ -16,12 +16,19 @@ const LABEL_CLASS = 'text-slate-800 text-sm font-semibold mb-1.5 block';
 
 const OrderRequirementsForm = ({ formData, setFormData }) => {
   const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const newData = { ...prev, [field]: value };
+      // If line spacing changes, recalculate word count
+      if (field === 'lineSpacing') {
+        newData.wordCount = formatWordCount(prev.pages, value);
+      }
+      return newData;
+    });
   };
 
   const setPageCount = (num) => {
     const pages = Math.max(1, num);
-    setFormData((prev) => ({ ...prev, pages, wordCount: formatWordCount(pages) }));
+    setFormData((prev) => ({ ...prev, pages, wordCount: formatWordCount(pages, prev.lineSpacing) }));
   };
 
   const incrementPages = () => setPageCount((parseInt(formData.pages, 10) || 1) + 1);

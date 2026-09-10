@@ -18,6 +18,14 @@ const OrderCostPanel = ({
   const { phone: contextPhone } = useHomeContext();
   const phone = contextPhone || SITE_CONFIG.phone;
 
+  // Calculate correct pricing breakdown
+  const baseOrderPrice = basePrice != null ? Number(basePrice) : 0;
+  const originalOrderPrice = baseOrderPrice * 2; // Base order × 2 (original price before discount)
+  const discountedOrderPrice = baseOrderPrice; // After 50% discount
+  const orderDiscount = originalOrderPrice - discountedOrderPrice; // 50% discount amount
+  const addonsPrice = addonsCost != null ? Number(addonsCost) : 0;
+  const finalPrice = discountedOrderPrice + addonsPrice;
+
   return (
     <>
       {/* Order Cost */}
@@ -26,18 +34,18 @@ const OrderCostPanel = ({
           <span className="font-bold text-sm uppercase tracking-wide">Order Cost</span>
         </div>
         <div className="flex flex-col divide-y divide-slate-100 px-5">
-          {/* Standard Price (x2) */}
-          {finalAmount != null && (
+          {/* Original Order Price (before discount, without add-ons) */}
+          {baseOrderPrice > 0 && (
             <div className="flex items-center justify-between py-2.5 text-sm">
               <span className="text-slate-600">Original Price</span>
-              <span className="text-slate-400 line-through font-semibold">
-                ${(finalAmount * 2).toFixed(2)}
+              <span className="text-slate-700 font-semibold">
+                ${originalOrderPrice.toFixed(2)}
               </span>
             </div>
           )}
 
-          {/* 50% Discount */}
-          {finalAmount != null && (
+          {/* 50% Discount on Order (not on add-ons) */}
+          {baseOrderPrice > 0 && (
             <div className="flex items-center justify-between py-2.5 text-sm bg-emerald-50/70 -mx-5 px-5">
               <span className="text-emerald-800 font-semibold flex items-center gap-1.5">
                 <span>Limited Time Discount</span>
@@ -46,7 +54,17 @@ const OrderCostPanel = ({
                 </span>
               </span>
               <span className="font-bold text-emerald-600">
-                −${finalAmount.toFixed(2)}
+                −${orderDiscount.toFixed(2)}
+              </span>
+            </div>
+          )}
+
+          {/* Add-ons (separate, not discounted) */}
+          {addonsPrice > 0 && (
+            <div className="flex items-center justify-between py-2.5 text-sm">
+              <span className="text-slate-600">Add-ons</span>
+              <span className="text-slate-700 font-semibold">
+                ${addonsPrice.toFixed(2)}
               </span>
             </div>
           )}
@@ -66,16 +84,16 @@ const OrderCostPanel = ({
           <div className="flex items-center justify-between py-3">
             <div>
               <span className="font-black text-slate-900 text-base uppercase block">Final Amount</span>
-              <span className="text-[11px] text-emerald-600 font-semibold">You save 50%</span>
+              <span className="text-[11px] text-emerald-600 font-semibold">You save 50% on order</span>
             </div>
             <div className="flex items-baseline gap-2">
-              {finalAmount != null && (
+              {baseOrderPrice > 0 && (
                 <span className="text-sm text-slate-400 line-through font-medium">
-                  ${(finalAmount * 2).toFixed(2)}
+                  ${(originalOrderPrice + addonsPrice).toFixed(2)}
                 </span>
               )}
               <span className="font-black text-primary text-xl">
-                {finalAmount != null ? `$${finalAmount.toFixed(2)}` : 'Calculating…'}
+                {baseOrderPrice > 0 ? `$${finalPrice.toFixed(2)}` : 'Calculating…'}
               </span>
             </div>
           </div>
@@ -91,7 +109,7 @@ const OrderCostPanel = ({
             onClick={onDepositFunds}
             className="w-full bg-primary hover:bg-primary-hover disabled:opacity-60 text-white font-black text-sm py-3.5 px-6 rounded transition-colors cursor-pointer shadow-sm tracking-wide uppercase"
           >
-            {isPaying ? 'Processing…' : finalAmount != null ? `DEPOSIT FUNDS ($${finalAmount.toFixed(2)})` : 'DEPOSIT FUNDS'}
+            {isPaying ? 'Processing…' : baseOrderPrice > 0 ? `DEPOSIT FUNDS ($${finalPrice.toFixed(2)})` : 'DEPOSIT FUNDS'}
           </button>
         </div>
       )}
