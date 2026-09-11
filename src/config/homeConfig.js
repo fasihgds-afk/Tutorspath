@@ -30,6 +30,9 @@ export const SEO_ROUTES_CONFIG = {
   routes: {
     // Show Home
     '/studentpage-1': 'auto',
+    '/studentpage-2': 'auto',
+    '/studentpage-3': 'auto',
+    '/studentpage-4': 'auto',
   },
 };
 
