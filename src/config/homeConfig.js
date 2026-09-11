@@ -29,7 +29,7 @@ export const SEO_ROUTES_CONFIG = {
   // Per-route mapping
   routes: {
     // Show Home
-    '/studentpage-1': 'home',
+    '/studentpage-1': 'auto',
   },
 };
 
