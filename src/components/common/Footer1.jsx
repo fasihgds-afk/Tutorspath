@@ -120,15 +120,7 @@ const Footer1 = () => {
                   24/7 Live Support Team
                 </span>
               </li>
-              <li>
-                <span className="flex items-start gap-2.5 text-slate-400 text-xs sm:text-sm">
-                  <svg className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
-                  <span>Office # 2, Choudhary Plaza, 2nd Floor, Plot 6/7 N Main Block Swan Garden , Islamabad , Islamabad Rural , Islamabad Capital Territory</span>
-                </span>
-              </li>
+            
             </ul>
           </div>
 
