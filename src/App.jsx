@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 import ScrollToHash from './components/common/ScrollToHash';
+import { AppConfigProvider } from './context/AppConfigContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToHash />
-      <AppRoutes />
+      <AppConfigProvider>
+        <ScrollToHash />
+        <AppRoutes />
+      </AppConfigProvider>
     </BrowserRouter>
   );
 }

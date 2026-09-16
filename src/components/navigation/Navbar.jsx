@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
-import { checkIsHome1Path, checkIsLandingPath } from '../../config/homeConfig';
+import { useAppConfig } from '../../context/AppConfigContext';
+import { isReservedPath, getHomeVariant, HOME_VARIANT } from '../../constants/routeConfig';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { landingIsHome1Override, activeRoutesLoaded, checkIsLandingPath } = useAppConfig();
 
-  const isHome1 = checkIsHome1Path(location.pathname, SITE_CONFIG.activeHome);
+  // Use dynamic routing if available, otherwise fall back to static config
+  const isHome1 = landingIsHome1Override !== undefined 
+    ? landingIsHome1Override 
+    : false; // fallback default
   const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
 
   // Close mobile menu on route change
@@ -44,7 +49,7 @@ const Navbar = () => {
   const handleHashLink = (e, hash) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    if (checkIsLandingPath(location.pathname)) {
+    if (checkIsLandingPath && checkIsLandingPath(location.pathname)) {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
@@ -52,6 +57,31 @@ const Navbar = () => {
       navigate(`${targetHome}#${hash}`);
     }
   };
+
+  // Show loading state while determining which header to show
+  if (!activeRoutesLoaded) {
+    return (
+      <header className="w-full bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50 relative">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left: Logo */}
+            <Link to="/" className="flex items-center shrink-0">
+              <img
+                src="/TutorsPath Logo.svg"
+                alt="TutorsPath"
+                className="h-5 w-auto"
+              />
+            </Link>
+            {/* Loading placeholder */}
+            <div className="flex items-center gap-3">
+              <div className="w-24 h-8 bg-gray-100 rounded-full animate-pulse" />
+              <div className="w-16 h-8 bg-gray-100 rounded-full animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="w-full bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50 relative">

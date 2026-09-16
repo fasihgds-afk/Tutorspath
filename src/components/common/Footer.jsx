@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { isReservedPath, getHomeVariant, HOME_VARIANT } from '../../constants/routeConfig';
 
 const Footer = () => {
   const navigate = useNavigate();
